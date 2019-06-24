@@ -1,26 +1,24 @@
-import React from 'react';
-import { Router, Link } from "@reach/router"
-import styled from '@emotion/styled'
+import React from "react";
 
-import Auth from './components/Auth'
-import LoggedIn from './components/LoggedIn'
+import { Router, Link } from "@reach/router";
+import styled from "@emotion/styled";
 
-import Dashboard from './components/Dashboard'
-import Timesheet from './components/Timesheet'
-import Timesheets from './components/Timesheets'
+import LoggedIn from "./components/LoggedIn";
 
-import Exam from './components/Exam'
-import Exams from './components/Exams'
-import Notes from './components/Notes'
-import Schedule from './components/Schedule'
-import Settings from './components/Settings'
-import User from './components/User'
-import Users from './components/Users'
+import Dashboard from "./components/Dashboard";
+import Timesheet from "./components/Timesheet";
+import Timesheets from "./components/Timesheets";
 
+import Exam from "./components/Exam";
+import Exams from "./components/Exams";
+import Notes from "./components/Notes";
+import Schedule from "./components/Schedule";
+import Settings from "./components/Settings";
+import User from "./components/User";
+import Users from "./components/Users";
 
-function App() {
+function AuthenticatedApp() {
   return (
-    <Auth>
     <AppWrapper>
       <Header>
         <h1>Dental Care</h1>
@@ -38,7 +36,7 @@ function App() {
       </Navigation>
       <main>
         <Router>
-          <Dashboard path ="/" />
+          <Dashboard path="/" />
           <Timesheet path="timesheet" />
           <Timesheets path="timesheets" />
           <Exam path="exam" />
@@ -52,11 +50,10 @@ function App() {
       <LoggedIn />
       <Footer>Footer Content Here</Footer>
     </AppWrapper>
-    </Auth>
   );
 }
 
-export default App;
+export default AuthenticatedApp;
 
 const AppWrapper = styled.div`
   height: 100vh;
@@ -65,10 +62,10 @@ const AppWrapper = styled.div`
   grid-template-rows: auto 1fr auto;
   /* grid-auto-rows: minmax(100px, auto); */
   grid-template-areas:
-    'hd  hd   hd   hd   hd   hd   hd   hd   hd'
-    'nav main main main main main main main li'
-    'ft  ft   ft   ft   ft   ft   ft   ft   ft';
-`
+    "hd  hd   hd   hd   hd   hd   hd   hd   hd"
+    "nav main main main main main main main li"
+    "ft  ft   ft   ft   ft   ft   ft   ft   ft";
+`;
 
 const Header = styled.header`
   grid-area: hd;
@@ -76,26 +73,26 @@ const Header = styled.header`
   justify-content: space-between;
   background-color: #512da8;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2);
-`
+`;
 
 const Navigation = styled.nav`
-display: flex;
+  display: flex;
   flex-direction: column;
   grid-area: nav;
   border-right: 2px solid #999;
 
- a {
-  padding: 10px 10px 0 10px;
-  transition: transform 0.3s;
-}
+  a {
+    padding: 10px 10px 0 10px;
+    transition: transform 0.3s;
+  }
 
- a:hover {
-  transform: scale(1.2);
- }
-`
+  a:hover {
+    transform: scale(1.2);
+  }
+`;
 
 const Footer = styled.footer`
-grid-area: ft;
+  grid-area: ft;
   background: #555;
   color: whitesmoke;
-`
+`;

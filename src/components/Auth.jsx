@@ -1,8 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function Auth({children}) {
-
-  return (<>{children}</>)
+function Auth({ children }) {
+  return <>{children}</>;
 }
 
-export default Auth
+export default Auth;
