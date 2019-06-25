@@ -1,0 +1,54 @@
+:root {
+  --color-white: hsl(0, 0%, 90%);
+  --color-black: hsl(0, 0%, 10%);
+  --color-background: hsl(283, 31%, 19%);
+  --color-low-light: hsl(258, 22%, 36%);
+  --color-neutral: hsl(213, 18%, 47%);
+  --color-primary: hsl(189, 43%, 68%);
+  --color-highlight: hsl(190, 100%, 86%);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-white);
+  font-size: 30px;
+}
+
+input,
+button,
+textarea {
+  font-size: 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  transition: background-color 400ms ease-in-out;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+  background-color: var(--color-primary);
+}
+
+button:hover {
+  background-color: var(--color-highlight);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-highlight);
+}
