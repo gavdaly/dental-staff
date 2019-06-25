@@ -17,7 +17,10 @@ import Settings from "./components/Settings";
 import User from "./components/User";
 import Users from "./components/Users";
 
+import { useUser } from "./hooks/userContext";
+
 function AuthenticatedApp() {
+  const { currentUser } = useUser();
   return (
     <AppWrapper>
       <Header>
@@ -27,12 +30,25 @@ function AuthenticatedApp() {
       <Navigation>
         <Link to="/">Dashboard</Link>
         <Link to="timesheet">Timesheet</Link>
-        <Link to="timesheets">Timesheets</Link>
-        <Link to="exam">Exam</Link>
-        <Link to="notes">Notes</Link>
-        <Link to="schedule">Schedule</Link>
+        {currentUser.role === "business_staff" && (
+          <>
+            <Link to="notes">Notes</Link>
+          </>
+        )}
+        {currentUser.role === "provider" && (
+          <>
+            <Link to="exam">Exam</Link>
+          </>
+        )}
+        {/* <Link to="schedule">Schedule</Link> */}
+        {currentUser.role === "admin" && (
+          <>
+            <Link to="exams">Exams</Link>
+            <Link to="timesheets">Timesheets</Link>
+            <Link to="users">Users</Link>
+          </>
+        )}
         <Link to="settings">Settings</Link>
-        <Link to="users">Users</Link>
       </Navigation>
       <main>
         <Router>
