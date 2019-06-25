@@ -1,5 +1,7 @@
+import { get } from "idb-keyval";
+
 export async function client(method, endpoint, { body, ...customConfig }) {
-  const token = ""; //get token
+  const token = await get("jwt");
   const headers = { "content-type": "application/json" };
   if (token) {
     headers.Authorization = token;

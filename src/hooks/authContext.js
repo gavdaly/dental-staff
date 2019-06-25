@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect
 } from "react";
+import { get, set, clear } from "idb-keyval";
 
 import client from "../utils/apiClient";
 
@@ -64,6 +65,23 @@ function AuthProvider(props) {
   const [jwt, setJwt] = useState("");
 
   useEffect(() => {
+    (async () => {
+      const token = await get("jwt");
+      if (token) {
+        setJwt(token);
+        loginDispatch({
+          type: authType.RESPONSE_CREDENTIALS,
+          payload: {
+            ...initialState,
+            jwt: token,
+            step: "authenticated"
+          }
+        });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (loginState.step === "processingPhone") {
       (async () => {
         const phoneResponse = await getPin(loginState.phoneNumber);
@@ -92,6 +110,7 @@ function AuthProvider(props) {
         );
         if (pinResponse.token) {
           setJwt(pinResponse.token);
+          set("jwt", pinResponse.token);
           loginDispatch({
             type: authType.RESPONSE_CREDENTIALS,
             payload: {
@@ -116,6 +135,7 @@ function AuthProvider(props) {
   }, [loginState, loginDispatch]);
 
   const logout = () => {
+    clear();
     loginDispatch({ type: authType.RESET });
   };
 
