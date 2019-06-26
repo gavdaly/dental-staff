@@ -4,20 +4,20 @@ import { Router, Link } from "@reach/router";
 import styled from "@emotion/styled";
 
 import LoggedIn from "./components/LoggedIn";
-
-import Dashboard from "./components/Dashboard";
-import Timesheet from "./components/Timesheet";
-import Timesheets from "./components/Timesheets";
-
-import Exam from "./components/Exam";
-import Exams from "./components/Exams";
-import Notes from "./components/Notes";
-import Schedule from "./components/Schedule";
-import Settings from "./components/Settings";
 import User from "./components/User";
-import Users from "./components/Users";
 
-import Vacations from "./components/Vacations";
+import {
+  Dashboard,
+  Exam,
+  Exams,
+  Notes,
+  Schedule,
+  Settings,
+  Timesheet,
+  Timesheets,
+  Users,
+  Vacations
+} from "./screens";
 
 import { useUser } from "./hooks/userContext";
 
@@ -94,8 +94,8 @@ const Header = styled.header`
   grid-area: hd;
   display: flex;
   justify-content: space-between;
-  background-color: #512da8;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  /* background-color: #512da8; */
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2); */
 `;
 
 const Navigation = styled.nav`
@@ -106,11 +106,11 @@ const Navigation = styled.nav`
 
   a {
     padding: 10px 10px 0 10px;
-    transition: transform 0.3s;
+    transition: color 300ms;
   }
 
   a:hover {
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
   }
 `;
 

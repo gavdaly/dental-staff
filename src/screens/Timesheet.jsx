@@ -4,30 +4,33 @@ import {
   DateRangeSelector,
   TimeSheetDisplay,
   AddMissingTime
-} from "./TimesheetComponents";
+} from "../components/Timesheet";
 
 import { userTimeSheet } from "../utils/timeSheetCalc";
 
-import "./TimesheetComponents/index.css";
+import "../components/Timesheet/index.css";
 
 import client from "../utils/apiClient";
 
 export default function Timesheet() {
-  const [dateRange, setDateRange] = useState({ start: "", end: "" });
+  const [dateRange, setDateRange] = useState({
+    start: "2017-01-01",
+    end: "2020-12-31"
+  });
   const [data, setData] = useState(null);
 
   useEffect(() => {
     (async () => {
       const response = await client(
         "GET",
-        `/staff/timesheets?start='2017-01-01'`,
+        `/staff/timesheets?start=${dateRange.start}&end=${dateRange.end}`,
         {}
       );
       console.log(response);
       const format = userTimeSheet(response);
       setData(format);
     })();
-  }, []);
+  }, [dateRange]);
 
   useEffect(() => {
     // request daterange
@@ -36,7 +39,7 @@ export default function Timesheet() {
   return (
     <>
       <AddMissingTime />
-      <DateRangeSelector setDateRange={setDateRange} />
+      <DateRangeSelector setDateRange={setDateRange} dateRange={dateRange} />
       {data && <TimeSheetDisplay entries={data} />}
       <pre>{data && JSON.stringify(data)}</pre>
     </>
