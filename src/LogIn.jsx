@@ -15,7 +15,7 @@ export const LogIn = () => {
       loginDispatch({ type: authType.SUBMIT_CREDENTIALS, payload });
       setPayload("");
     }
-  }, [loginState.step, payload]);
+  }, [loginState.step, payload, authType.SUBMIT_CREDENTIALS, loginDispatch]);
 
   useEffect(() => {
     console.log("LOGINSTATE: ", loginState);

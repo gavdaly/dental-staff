@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 
-import client from "../utils/apiClient";
+// import client from "../utils/apiClient";
 
 import { useAuth } from "./authContext";
 
@@ -9,7 +9,7 @@ const UserContext = createContext();
 
 async function updateUserDetails(token_values, updateUser) {
   // const details = client(); Get more info in the future
-  updateUser(...token_values);
+  updateUser(token_values);
 }
 
 const UserProvider = props => {

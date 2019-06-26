@@ -17,6 +17,8 @@ import Settings from "./components/Settings";
 import User from "./components/User";
 import Users from "./components/Users";
 
+import Vacations from "./components/Vacations";
+
 import { useUser } from "./hooks/userContext";
 
 function AuthenticatedApp() {
@@ -48,9 +50,10 @@ function AuthenticatedApp() {
             <Link to="users">Users</Link>
           </>
         )}
+        <Link to="vacations">Vacations & Time Off</Link>
         <Link to="settings">Settings</Link>
       </Navigation>
-      <main>
+      <main id="main">
         <Router>
           <Dashboard path="/" />
           <Timesheet path="timesheet" />
@@ -61,6 +64,7 @@ function AuthenticatedApp() {
           <Schedule path="schedule" />
           <Settings path="settings" />
           <Users path="users" />
+          <Vacations path="vacations" />
         </Router>
       </main>
       <LoggedIn />
@@ -81,6 +85,9 @@ const AppWrapper = styled.div`
     "hd  hd   hd   hd   hd   hd   hd   hd   hd"
     "nav main main main main main main main li"
     "ft  ft   ft   ft   ft   ft   ft   ft   ft";
+  #main {
+    grid-area: main;
+  }
 `;
 
 const Header = styled.header`

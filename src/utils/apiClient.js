@@ -1,6 +1,6 @@
 import { get } from "idb-keyval";
 
-export async function client(method, endpoint, { body, ...customConfig }) {
+export async function client(method, endpoint, { body, ...customConfig } = {}) {
   const token = await get("jwt");
   const headers = { "content-type": "application/json" };
   if (token) {
@@ -19,7 +19,9 @@ export async function client(method, endpoint, { body, ...customConfig }) {
   }
   console.log("api call:", endpoint, config);
   const response = await fetch(`http://localhost:4000${endpoint}`, config);
-  return await response.json();
+  const json = await response.json();
+  console.log("response:", json);
+  return await json;
 }
 
 export default client;
