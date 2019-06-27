@@ -26,14 +26,9 @@ export default function Timesheet() {
         `/staff/timesheets?start=${dateRange.start}&end=${dateRange.end}`,
         {}
       );
-      console.log(response);
       const format = userTimeSheet(response);
       setData(format);
     })();
-  }, [dateRange]);
-
-  useEffect(() => {
-    // request daterange
   }, [dateRange]);
 
   return (
@@ -41,7 +36,6 @@ export default function Timesheet() {
       <AddMissingTime />
       <DateRangeSelector setDateRange={setDateRange} dateRange={dateRange} />
       {data && <TimeSheetDisplay entries={data} />}
-      <pre>{data && JSON.stringify(data)}</pre>
     </>
   );
 }

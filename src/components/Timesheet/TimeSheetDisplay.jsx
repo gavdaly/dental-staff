@@ -1,3 +1,9 @@
 import React from "react";
 
-export const TimeSheetDisplay = ({ entries }) => <div>endries go here</div>;
+export const TimeSheetDisplay = ({ entries }) => (
+  <>
+    {entries.map(entry => (
+      <div>{entry}</div>
+    ))}
+  </>
+);

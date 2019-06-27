@@ -76,8 +76,10 @@ function AuthenticatedApp() {
 export default AuthenticatedApp;
 
 const AppWrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
+  @media screen {
+  }
   grid-template-columns: auto repeat(7, 1fr) auto;
   grid-template-rows: auto 1fr auto;
   /* grid-auto-rows: minmax(100px, auto); */
@@ -94,7 +96,9 @@ const Header = styled.header`
   grid-area: hd;
   display: flex;
   justify-content: space-between;
-  /* background-color: #512da8; */
+  background-color: var(--color-black);
+  padding: 0.6rem;
+  align-items: baseline;
   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2); */
 `;
 
@@ -102,9 +106,10 @@ const Navigation = styled.nav`
   display: flex;
   flex-direction: column;
   grid-area: nav;
-  border-right: 2px solid #999;
+  background-color: var(--color-neutral);
 
   a {
+    color: var(--color-black);
     padding: 10px 10px 0 10px;
     transition: color 300ms;
   }
@@ -118,4 +123,5 @@ const Footer = styled.footer`
   grid-area: ft;
   background: #555;
   color: whitesmoke;
+  padding: 0.6rem;
 `;

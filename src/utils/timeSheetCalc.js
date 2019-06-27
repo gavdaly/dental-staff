@@ -72,6 +72,7 @@ const fullTimesheet = (users, data) => {
 
 export const userTimeSheet = data => {
   if (!data) return null;
+  console.log(data);
   const d = mergeData(data);
   return {
     weeklySummary: weeklySummary(d),
