@@ -35,7 +35,7 @@ export default function Timesheet() {
     <>
       <AddMissingTime />
       <DateRangeSelector setDateRange={setDateRange} dateRange={dateRange} />
-      {data && <TimeSheetDisplay entries={data} />}
+      {data && <TimeSheetDisplay entries={data.timesheet} />}
     </>
   );
 }

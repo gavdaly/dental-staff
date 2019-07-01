@@ -82,7 +82,6 @@ const AppWrapper = styled.div`
   }
   grid-template-columns: auto repeat(7, 1fr) auto;
   grid-template-rows: auto 1fr auto;
-  /* grid-auto-rows: minmax(100px, auto); */
   grid-template-areas:
     "hd  hd   hd   hd   hd   hd   hd   hd   hd"
     "nav main main main main main main main li"

@@ -18,7 +18,7 @@ export async function client(method, endpoint, { body, ...customConfig } = {}) {
     config.body = JSON.stringify(body);
   }
   console.log("api call:", endpoint, config);
-  const response = await fetch(`http://localhost:4000${endpoint}`, config);
+  const response = await fetch(`http://localhost:3000${endpoint}`, config);
   const json = await response.json();
   console.log("response:", json);
   return await json;

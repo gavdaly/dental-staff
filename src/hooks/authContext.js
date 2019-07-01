@@ -137,6 +137,7 @@ function AuthProvider(props) {
   const logout = () => {
     clear();
     loginDispatch({ type: authType.RESET });
+    // setJwt(null); // causes error
   };
 
   return (

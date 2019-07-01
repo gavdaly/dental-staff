@@ -1,9 +1,15 @@
 import React from "react";
 
-export const TimeSheetDisplay = ({ entries }) => (
-  <>
-    {entries.map(entry => (
-      <div>{entry}</div>
-    ))}
-  </>
-);
+import { DayEntry } from "./Entry";
+
+export const TimeSheetDisplay = ({ entries: days }) => {
+  console.log("days", days);
+  return (
+    <>
+      {days &&
+        Object.keys(days).map(day => (
+          <DayEntry key={day} dayEntry={days[day]} />
+        ))}
+    </>
+  );
+};

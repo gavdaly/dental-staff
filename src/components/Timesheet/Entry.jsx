@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export const Entries = ({ entries }) => (
   <div className="entires">
@@ -35,12 +35,12 @@ const CorrectingEntry = ({ setIsCorrecting }) => {
   function submit(event) {
     event.preventDefault();
     setFormState("submitting");
-    submitCorrectingEntry({ startTime, endTime, reason });
+    // submitCorrectingEntry({ startTime, endTime, reason });
   }
 
   useEffect(async () => {
-    const isValid = await validate({ startTime, endTime, reason });
-    if (isValid) setFormState("valid");
+    // const isValid = await validate({ startTime, endTime, reason });
+    // if (isValid) setFormState("valid");
   }, [startTime, endTime, reason]);
 
   function cancel(event) {
@@ -213,14 +213,11 @@ const AdjustmentEntry = ({ entry }) => (
 export const Entry = ({ entry }) => {
   switch (entry.type) {
     case "hours":
-      <HoursEntry entry={entry} />;
-      break;
+      return <HoursEntry entry={entry} />;
     case "vacation":
-      <VacationEntry entry={entry} />;
-      break;
+      return <VacationEntry entry={entry} />;
     case "adjustment":
-      <AdjustmentEntry entry={entry} />;
-      break;
+      return <AdjustmentEntry entry={entry} />;
     default:
       new Error(`incorrect entry type: ${entry}`);
   }
