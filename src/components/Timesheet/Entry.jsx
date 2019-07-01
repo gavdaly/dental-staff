@@ -8,9 +8,9 @@ export const Entries = ({ entries }) => (
   </div>
 );
 
-export const DayEntry = ({ dayEntry }) => (
+export const DayEntry = ({ dayEntry, day }) => (
   <div className="date_entry">
-    <div className="entry_date">2019-12-31</div>
+    <div className="entry_date">{day}</div>
     <div>
       {dayEntry.map(entry => (
         <Entry entry={entry} />

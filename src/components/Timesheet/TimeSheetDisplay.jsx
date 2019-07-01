@@ -8,7 +8,7 @@ export const TimeSheetDisplay = ({ entries: days }) => {
     <>
       {days &&
         Object.keys(days).map(day => (
-          <DayEntry key={day} dayEntry={days[day]} />
+          <DayEntry key={day} day={day} dayEntry={days[day]} />
         ))}
     </>
   );
