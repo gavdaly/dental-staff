@@ -13,7 +13,7 @@ export const DayEntry = ({ dayEntry, day }) => (
     <div className="entry_date">{day}</div>
     <div>
       {dayEntry.map(entry => (
-        <Entry entry={entry} />
+        <Entry key={entry.id} entry={entry} />
       ))}
     </div>
   </div>
@@ -38,9 +38,11 @@ const CorrectingEntry = ({ setIsCorrecting }) => {
     // submitCorrectingEntry({ startTime, endTime, reason });
   }
 
-  useEffect(async () => {
-    // const isValid = await validate({ startTime, endTime, reason });
-    // if (isValid) setFormState("valid");
+  useEffect(() => {
+    (async () => {
+      // const isValid = await validate({ startTime, endTime, reason });
+      if (true) setFormState("valid");
+    })();
   }, [startTime, endTime, reason]);
 
   function cancel(event) {
