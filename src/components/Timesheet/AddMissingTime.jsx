@@ -4,7 +4,7 @@ import React from "react";
 
 // async function sendMissingTime(state) {
 //   const response = await client("POST", `/staff/missing`, {
-//     body: { missing_time_shheet: { ...state } }
+//     body: { missing_time_sheet: { ...state } }
 //   });
 // }
 
