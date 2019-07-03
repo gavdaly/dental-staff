@@ -9,7 +9,7 @@ export default function User() {
 
   function onClick() {
     logout();
-    navigate("/", { replace: true });
+    navigate("/");
   }
 
   return <LogOutButton onClick={onClick}>logout</LogOutButton>;

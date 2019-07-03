@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Router, Link } from "@reach/router";
 import styled from "@emotion/styled";
@@ -22,37 +22,45 @@ import {
 import { useUser } from "./hooks/userContext";
 
 function AuthenticatedApp() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const { currentUser } = useUser();
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+    console.log("Menu", menuOpen);
+  }
   return (
     <AppWrapper>
       <Header>
+        <button onclick={toggleMenu}>{menuOpen ? "close" : "hamburger"}</button>
         <h1>Dental Care</h1>
         <User />
       </Header>
-      <Navigation>
-        <Link to="/">Dashboard</Link>
-        <Link to="timesheet">Timesheet</Link>
-        {currentUser.role === "business_staff" && (
-          <>
-            <Link to="notes">Notes</Link>
-          </>
-        )}
-        {currentUser.role === "provider" && (
-          <>
-            <Link to="exam">Exam</Link>
-          </>
-        )}
-        {/* <Link to="schedule">Schedule</Link> */}
-        {currentUser.role === "admin" && (
-          <>
-            <Link to="exams">Exams</Link>
-            <Link to="timesheets">Timesheets</Link>
-            <Link to="users">Users</Link>
-          </>
-        )}
-        <Link to="vacations">Vacations & Time Off</Link>
-        <Link to="settings">Settings</Link>
-      </Navigation>
+      {menuOpen && (
+        <Navigation>
+          <Link to="/">Dashboard</Link>
+          <Link to="timesheet">Timesheet</Link>
+          {currentUser.role === "business_staff" && (
+            <>
+              <Link to="notes">Notes</Link>
+            </>
+          )}
+          {currentUser.role === "provider" && (
+            <>
+              <Link to="exam">Exam</Link>
+            </>
+          )}
+          {/* <Link to="schedule">Schedule</Link> */}
+          {currentUser.role === "admin" && (
+            <>
+              <Link to="exams">Exams</Link>
+              <Link to="timesheets">Timesheets</Link>
+              <Link to="users">Users</Link>
+            </>
+          )}
+          <Link to="vacations">Vacations & Time Off</Link>
+          <Link to="settings">Settings</Link>
+        </Navigation>
+      )}
       <main id="main">
         <Router>
           <Dashboard path="/" />

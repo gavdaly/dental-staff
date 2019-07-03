@@ -1,20 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 
-// import client from "../../utils/apiClient";
+import { useTimeSheet } from "../../hooks/timeSheetContext";
 
-// async function sendMissingTime(state) {
-//   const response = await client("POST", `/staff/missing`, {
-//     body: { missing_time_sheet: { ...state } }
-//   });
-// }
+const initialState = {
+  date: "",
+  start: "",
+  end: "",
+  reason: ""
+};
 
 export const AddMissingTime = () => {
+  const [isShowingForm, setIsShowingForm] = useState(false);
+  const [values, setValues] = useState(initialState);
+  const { addMissingEntry } = useTimeSheet();
+
+  const onSubmit = event => {
+    event.preventDefault();
+    addMissingEntry(values);
+    setValues(initialState);
+  };
+
+  const cancelForm = () => {
+    setIsShowingForm(false);
+    setValues(initialState);
+  };
+
   return (
-    <form>
-      <input type="date" name="" id="" />
-      <input type="time" name="" id="" />
-      <input type="time" name="" id="" />
-      <textarea name="" id="" cols="30" rows="10" />
-    </form>
+    <>
+      {isShowingForm ? (
+        <form onSubmit={onSubmit}>
+          <p>
+            <label htmlFor="date">Date</label>
+            <input
+              value={values.date}
+              onChange={event =>
+                setValues({ ...values, date: event.target.value })
+              }
+              type="date"
+              name="date"
+              id="date"
+            />
+          </p>
+          <p>
+            <label htmlFor="start">Start</label>
+            <input
+              value={values.start}
+              onChange={event =>
+                setValues({ ...values, start: event.target.value })
+              }
+              type="time"
+              name="start"
+              id="start"
+            />
+          </p>
+
+          <p>
+            <label htmlFor="end">End</label>
+            <input
+              value={values.end}
+              onChange={event =>
+                setValues({ ...values, end: event.target.value })
+              }
+              type="time"
+              name="end"
+              id="end"
+            />
+          </p>
+
+          <p>
+            <label htmlFor="reason">Reason</label>
+            <textarea
+              value={values.reason}
+              onChange={event =>
+                setValues({ ...values, reason: event.target.value })
+              }
+              name="reason"
+              id="reason"
+              cols="30"
+              rows="10"
+            />
+          </p>
+
+          <button onClick={onSubmit}>Add Missing Entry</button>
+          <button onClick={cancelForm}>Cancel</button>
+        </form>
+      ) : (
+        <button onClick={() => setIsShowingForm(true)}>
+          Add A Missing Entry
+        </button>
+      )}
+    </>
   );
 };

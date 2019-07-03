@@ -3,7 +3,6 @@ import React, { useState, useContext, createContext, useEffect } from "react";
 import { userTimeSheet } from "../utils/timeSheetCalc";
 
 import client from "../utils/apiClient";
-import { useAuth } from "./authContext";
 
 const TimeSheetContext = createContext();
 
@@ -14,27 +13,40 @@ function TimeSheetProvider(props) {
     end: "2020-12-31"
   });
 
-  const { jwt } = useAuth();
-
   useEffect(() => {
-    (async () => {
-      const response = await client(
-        "GET",
-        `/staff/timesheets?start=${dateRange.start}&end=${dateRange.end}`,
-        {}
-      );
-      const format = userTimeSheet(response);
-      setTimeSheetData(format);
-    })();
+    updateTimeSheet();
   }, [dateRange]);
 
-  function updateTimeSheet() {}
+  async function updateTimeSheet() {
+    const response = await client(
+      "GET",
+      `/staff/timesheets?start=${dateRange.start}&end=${dateRange.end}`,
+      {}
+    );
+    const format = userTimeSheet(response);
+    setTimeSheetData(format);
+  }
 
-  function correctEntry() {}
+  async function correctEntry(state) {
+    const response = await client("POST", `/staff/correct_assignation`, {
+      body: { correct_assignation: { ...state } }
+    });
+    return response;
+  }
 
-  function addMissingEntry() {}
+  async function addMissingEntry(state) {
+    const response = await client("POST", `/staff/missing_assignation`, {
+      body: { missing_assignation: { ...state } }
+    });
+    return response;
+  }
 
-  function addVacation() {}
+  async function addVacation(state) {
+    const response = await client("POST", ``, {
+      body: { vacation: { ...state } }
+    });
+    return response;
+  }
 
   return (
     <TimeSheetContext.Provider

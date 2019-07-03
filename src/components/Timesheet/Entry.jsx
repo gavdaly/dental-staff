@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { format } from "date-fns";
 
 export const Entries = ({ entries }) => (
   <div className="entires">
@@ -19,18 +20,9 @@ export const DayEntry = ({ dayEntry, day }) => (
   </div>
 );
 
-const CorrectingEntry = ({ setIsCorrecting }) => {
+const CorrectingEntry = ({ setIsCorrecting, start, end }) => {
   const [formState, setFormState] = useState("invalid");
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
-  const [reason, setReason] = useState("");
-
-  function resetFields() {
-    setFormState("invalid");
-    setStartTime(0);
-    setEndTime(0);
-    setReason("");
-  }
+  const [value, setValue] = useState({ start, end, reason: "" });
 
   function submit(event) {
     event.preventDefault();
@@ -43,21 +35,43 @@ const CorrectingEntry = ({ setIsCorrecting }) => {
       // const isValid = await validate({ startTime, endTime, reason });
       if (true) setFormState("valid");
     })();
-  }, [startTime, endTime, reason]);
+  }, [value]);
 
   function cancel(event) {
     event.preventDefault();
     setIsCorrecting(false);
-    resetFields();
+    setValue({ start, end, reason: "" });
   }
 
   return (
     <>
       <div className="timeGroup">
-        <input type="time" />
-        <input type="time" />
+        <p>
+          <label htmlFor="start">Start Time</label>
+          <input
+            id="start"
+            type="time"
+            value={value.start}
+            onChange={event =>
+              setValue({ ...value, start: event.target.value })
+            }
+          />
+        </p>
+        <p>
+          }<label htmlFor="end">End Time</label>
+          <input
+            id="end"
+            type="time"
+            value={value.end}
+            onChange={event => setValue({ ...value, end: event.target.value })}
+          />
+        </p>
       </div>
-      <textarea />
+      <p>
+        <label htmlFor="reason" />
+        <textarea id="reason" />
+      </p>
+
       <button className={formState} onClick={submit}>
         submit
       </button>
@@ -67,19 +81,32 @@ const CorrectingEntry = ({ setIsCorrecting }) => {
 };
 
 const EditableEntry = ({ entry }) => {
+  // const date = format(date.start_time, 'YYYY-MM-DD')
+  const start = format(entry.start_time, "HH:mm");
+  const end = format(entry.end_time, "HH:mm");
+
+  const displayStart = format(entry.start_time, "h:mm aa");
+  const displayEnd = format(entry.end_time, "h:mm aa");
   const [isCorrecting, setIsCorrecting] = useState(false);
+  console.log("Entry", entry);
   return (
     <div className="entry time state_editable">
       <div className="timeGroup">
         <div className="time_start">
-          Start: <span>8:00am</span>
+          Start: <span>{displayStart}</span>
         </div>
         <div className="time_end">
-          End: <span>5:00pm</span>
+          End: <span>{displayEnd}</span>
         </div>
       </div>
 
-      {isCorrecting && <CorrectingEntry setIsCorrecting={setIsCorrecting} />}
+      {isCorrecting && (
+        <CorrectingEntry
+          start={start}
+          end={end}
+          setIsCorrecting={setIsCorrecting}
+        />
+      )}
       <div className="state editable" onClick={() => setIsCorrecting(true)}>
         Edit
       </div>
