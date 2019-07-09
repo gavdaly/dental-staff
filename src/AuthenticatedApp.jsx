@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { Router, Link } from "@reach/router";
 import styled from "@emotion/styled";
+import { useSpring, animated } from "react-spring";
 
-import LoggedIn from "./components/LoggedIn";
 import User from "./components/User";
 
 import {
@@ -24,6 +24,8 @@ import { useUser } from "./hooks/userContext";
 function AuthenticatedApp() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { currentUser } = useUser();
+  const props = useSpring({ opacity: menuOpen ? 1 : 0 });
+
   function toggleMenu() {
     setMenuOpen(!menuOpen);
     console.log("Menu", menuOpen);
@@ -31,37 +33,35 @@ function AuthenticatedApp() {
   return (
     <AppWrapper>
       <Header>
-        <button onclick={toggleMenu}>{menuOpen ? "close" : "hamburger"}</button>
+        <button onClick={toggleMenu}>{menuOpen ? "close" : "hamburger"}</button>
         <h1>Dental Care</h1>
         <User />
       </Header>
-      {menuOpen && (
-        <Navigation>
-          <Link to="/">Dashboard</Link>
-          <Link to="timesheet">Timesheet</Link>
-          {currentUser.role === "business_staff" && (
-            <>
-              <Link to="notes">Notes</Link>
-            </>
-          )}
-          {currentUser.role === "provider" && (
-            <>
-              <Link to="exam">Exam</Link>
-            </>
-          )}
-          {/* <Link to="schedule">Schedule</Link> */}
-          {currentUser.role === "admin" && (
-            <>
-              <Link to="exams">Exams</Link>
-              <Link to="timesheets">Timesheets</Link>
-              <Link to="users">Users</Link>
-            </>
-          )}
-          <Link to="vacations">Vacations & Time Off</Link>
-          <Link to="settings">Settings</Link>
-        </Navigation>
-      )}
-      <main id="main">
+      <Navigation style={props}>
+        <Link to="/">Dashboard</Link>
+        <Link to="timesheet">Timesheet</Link>
+        {currentUser.role === "business_staff" && (
+          <>
+            <Link to="notes">Notes</Link>
+          </>
+        )}
+        {currentUser.role === "provider" && (
+          <>
+            <Link to="exam">Exam</Link>
+          </>
+        )}
+        {currentUser.role === "admin" && (
+          <>
+            <Link to="exams">Exams</Link>
+            <Link to="timesheets">Timesheets</Link>
+            <Link to="users">Users</Link>
+          </>
+        )}
+        <Link to="vacations">Vacations & Time Off</Link>
+        <Link to="settings">Settings</Link>
+      </Navigation>
+
+      <Main id="main">
         <Router>
           <Dashboard path="/" />
           <Timesheet path="timesheet" />
@@ -74,9 +74,7 @@ function AuthenticatedApp() {
           <Users path="users" />
           <Vacations path="vacations" />
         </Router>
-      </main>
-      <LoggedIn />
-      <Footer>Footer Content Here</Footer>
+      </Main>
     </AppWrapper>
   );
 }
@@ -84,51 +82,47 @@ function AuthenticatedApp() {
 export default AuthenticatedApp;
 
 const AppWrapper = styled.div`
+  --small-width: true;
   min-height: 100vh;
+  width: 100vw;
   display: grid;
-  @media screen {
-  }
-  grid-template-columns: auto repeat(7, 1fr) auto;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
-    "hd  hd   hd   hd   hd   hd   hd   hd   hd"
-    "nav main main main main main main main li"
-    "ft  ft   ft   ft   ft   ft   ft   ft   ft";
-  #main {
-    grid-area: main;
+    "header header"
+    "main main"
   }
 `;
 
+const Main = styled.main`
+  grid-area: main;
+  width: 100%;
+`;
+
 const Header = styled.header`
-  grid-area: hd;
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   background-color: var(--color-black);
   padding: 0.6rem;
   align-items: baseline;
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2);
 `;
 
-const Navigation = styled.nav`
+const Navigation = styled(animated.nav)`
   display: flex;
   flex-direction: column;
-  grid-area: nav;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  grid-area: main;
   background-color: var(--color-neutral);
-
+  overflow: none;
+  z-index: 1;
+  width: auto;
   a {
     color: var(--color-black);
     padding: 10px 10px 0 10px;
     transition: color 300ms;
   }
-
-  a:hover {
-    /* transform: scale(1.2); */
-  }
-`;
-
-const Footer = styled.footer`
-  grid-area: ft;
-  background: #555;
-  color: whitesmoke;
-  padding: 0.6rem;
 `;
