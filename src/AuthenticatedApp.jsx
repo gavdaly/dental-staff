@@ -24,7 +24,9 @@ import { useUser } from "./hooks/userContext";
 
 function AuthenticatedApp() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { currentUser } = useUser();
+  const {
+    currentUser: { role }
+  } = useUser();
   const props = useSpring({
     opacity: menuOpen ? 1 : 0,
     transform: `translate(${menuOpen ? 0 : -100}%)`
@@ -53,17 +55,17 @@ function AuthenticatedApp() {
       <Navigation style={props} onClick={e => setMenuOpen(false)}>
         <Link to="/">Dashboard</Link>
         <Link to="timesheet">Timesheet</Link>
-        {currentUser.role === "business_staff" && (
+        {role === "business_staff" && (
           <>
             <Link to="notes">Notes</Link>
           </>
         )}
-        {currentUser.role === "provider" && (
+        {role === "provider" && (
           <>
             <Link to="exam">Exam</Link>
           </>
         )}
-        {currentUser.role === "admin" && (
+        {role === "admin" && (
           <>
             <Link to="exams">Exams</Link>
             <Link to="timesheets">Timesheets</Link>
@@ -125,8 +127,6 @@ const Header = styled.header`
 const Navigation = styled(animated.nav)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
   text-align: center;
   grid-area: main;
   background-color: var(--color-neutral);
