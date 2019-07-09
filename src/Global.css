@@ -6,6 +6,13 @@
   --color-neutral: hsl(213, 18%, 47%);
   --color-primary: hsl(189, 43%, 68%);
   --color-highlight: hsl(190, 100%, 86%);
+  --color-success: hsl(122, 75%, 25%);
+  --color-error: hsl(15, 86%, 39%);
+  --color-warning: hsl(51, 93%, 32%);
+  --color-vacation: hsl(122, 85%, 15%);
+  --color-entry: hsl(214, 92%, 15%);
+  --color-stat: hsl(0, 0, 20%);
+  --color-admin: hsl(15, 90%, 15%);
 }
 
 *,
@@ -23,6 +30,11 @@ body {
   background-color: var(--color-background);
   color: var(--color-white);
   font-size: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input,
@@ -51,4 +63,9 @@ a {
 
 a:hover {
   color: var(--color-highlight);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
