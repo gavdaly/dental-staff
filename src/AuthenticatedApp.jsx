@@ -37,7 +37,7 @@ function AuthenticatedApp() {
         <h1>Dental Care</h1>
         <User />
       </Header>
-      <Navigation style={props}>
+      <Navigation style={props} onClick={e => setMenuOpen(false)}>
         <Link to="/">Dashboard</Link>
         <Link to="timesheet">Timesheet</Link>
         {currentUser.role === "business_staff" && (
