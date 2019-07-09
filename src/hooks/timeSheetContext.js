@@ -7,7 +7,9 @@ import client from "../utils/apiClient";
 const TimeSheetContext = createContext();
 
 function TimeSheetProvider(props) {
-  const [timeSheetData, setTimeSheetData] = useState(null);
+  const [timeSheetData, setTimeSheetData] = useState({
+    timesheet: {}
+  });
   const [dateRange, setDateRange] = useState({
     start: "2017-01-01",
     end: "2020-12-31"
