@@ -1,14 +1,17 @@
 import React from "react";
 
 import { DayEntry } from "./Entry";
+import { useTimeSheet } from "../../hooks/timeSheetContext";
 
-export const TimeSheetDisplay = ({ entries: days }) => {
-  console.log("days", days);
+export const TimeSheetDisplay = () => {
+  const {
+    timeSheetData: { timesheet }
+  } = useTimeSheet();
   return (
     <>
-      {days &&
-        Object.keys(days).map(day => (
-          <DayEntry key={day} day={day} dayEntry={days[day]} />
+      {Object.keys(timesheet) &&
+        Object.keys(timesheet).map(day => (
+          <DayEntry key={day} day={day} dayEntry={timesheet[day]} />
         ))}
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useTimeSheet } from "../hooks/timeSheetContext";
+import { TimeSheetProvider } from "../hooks/timeSheetContext";
 
 import {
   DateRangeSelector,
@@ -11,13 +11,11 @@ import {
 import "../components/Timesheet/index.css";
 
 export default function Timesheet() {
-  const { timeSheetData } = useTimeSheet();
-
   return (
-    <>
+    <TimeSheetProvider>
       <AddMissingTime />
       <DateRangeSelector />
-      {timeSheetData && <TimeSheetDisplay entries={timeSheetData.timesheet} />}
-    </>
+      <TimeSheetDisplay />
+    </TimeSheetProvider>
   );
 }
