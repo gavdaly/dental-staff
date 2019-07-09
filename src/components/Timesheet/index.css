@@ -1,10 +1,11 @@
 .date_entry {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--color-black);
   margin-bottom: 5px;
 }
+
 .entry {
   display: grid;
-  border-bottom: 0.3px solid grey;
+  border-bottom: 0.3px solid var(--color-neutral);
   grid-template-columns: 1fr auto;
 
   grid-template-areas:
@@ -15,25 +16,25 @@
 }
 
 .vacation {
-  background-color: lightblue;
+  background-color: var(--color-vacation);
   grid-area: text;
 }
 
 .adjustment {
-  background-color: lightpink;
+  background-color: var(--color-admin);
   grid-area: text;
 }
 
 .time {
-  background-color: lightgreen;
+  background-color: var(--color-entry);
 }
 .correction {
-  border-left: 5px solid rgba(255, 0, 0, 0.8);
+  border-left: 5px solid rgba(255, 0, 50%, 0.6);
   padding-left: 1em;
   grid-area: text;
 }
 .state {
-  background-color: black;
+  background-color: var(--color-black);
   color: white;
   grid-area: state;
   padding: 0.5em;
@@ -42,8 +43,7 @@
 }
 
 .endry_date {
-  background-color: black;
-  color: white;
+  background-color: var(--color-black);
   padding: 0.5em;
   font-size: 1.4rem;
   font-weight: 800;
