@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Router, Link } from "@reach/router";
 import styled from "@emotion/styled";
 import { useSpring, animated } from "react-spring";
+import { Bars, Close } from "./svg";
 
 import User from "./components/User";
 
@@ -20,7 +21,6 @@ import {
 } from "./screens";
 
 import { useUser } from "./hooks/userContext";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 function AuthenticatedApp() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +37,16 @@ function AuthenticatedApp() {
   return (
     <AppWrapper>
       <Header>
-        <button onClick={toggleMenu}>{menuOpen ? "close" : "hamburger"}</button>
+        <button
+          style={{
+            width: "2em",
+            background: "none",
+            color: "var(--color-white)"
+          }}
+          onClick={toggleMenu}
+        >
+          {menuOpen ? <Close /> : <Bars />}
+        </button>
         <h1>Dental Care</h1>
         <User />
       </Header>
