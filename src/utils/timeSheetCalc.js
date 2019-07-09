@@ -22,6 +22,7 @@ export const today = () => {
 };
 
 const mergeData = ({ assignations, adjustments, corrections }) => {
+  if (!assignations) return;
   const e = assignations.map(entry => {
     return {
       ...entry,
@@ -81,6 +82,7 @@ export const userTimeSheet = data => {
 };
 
 const weeklySummary = userData => {
+  if (!userData) return;
   return userData.reduce((prev, current) => {
     const startOfWeek = beginningOfWeek(current.start);
     if (!prev[startOfWeek]) {
@@ -92,6 +94,7 @@ const weeklySummary = userData => {
 };
 
 const weeklyTimeSheet = userData => {
+  if (!userData) return;
   return userData.reduce((prev, currentItem) => {
     const date = currentItem.start.slice(0, 10);
     if (prev[date]) {
