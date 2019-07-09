@@ -123,10 +123,18 @@ const HoursEntry = ({ entry }) => {
   const displayEnd = format(entry.end_time, "h:mm aa");
 
   const correction = entry.correction;
-  const correctionStart = format(correction.start_time, "h:mm aa");
-  const correctionEnd = format(correction.end_time, "h:mm aa");
-  const originalStart = format(correction.original_start_time, "h:mm aa");
-  const originalEnd = format(correction.original_end_time, "h:mm aa");
+
+  var correctionStart = "error";
+  var correctionEnd = "error";
+  var originalStart = "error";
+  var originalEnd = "error";
+
+  if (correction) {
+    correctionStart = format(correction.start_time, "h:mm aa");
+    correctionEnd = format(correction.end_time, "h:mm aa");
+    originalStart = format(correction.original_start_time, "h:mm aa");
+    originalEnd = format(correction.original_end_time, "h:mm aa");
+  }
   switch (entry.state) {
     case "pending":
       return (
@@ -141,14 +149,16 @@ const HoursEntry = ({ entry }) => {
                 Original End: <span>{displayEnd}</span>
               </div>
             </div>
-            <div className="time_group">
-              <div className="requested_start">
-                Requested Start: <span>{correctionStart}</span>
+            {correction && (
+              <div className="time_group">
+                <div className="requested_start">
+                  Requested Start: <span>{correctionStart}</span>
+                </div>
+                <div className="requested_end">
+                  Requested End: <span>{correctionEnd}</span>
+                </div>
               </div>
-              <div className="requested_end">
-                Requested End: <span>{correctionEnd}</span>
-              </div>
-            </div>
+            )}
           </div>
           <div className="state">{entry.state}</div>
         </div>
