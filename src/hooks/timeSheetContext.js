@@ -17,6 +17,7 @@ function TimeSheetProvider(props) {
 
   useEffect(() => {
     updateTimeSheet();
+    // eslint-disable-next-line
   }, [dateRange]);
 
   async function updateTimeSheet() {

@@ -20,11 +20,15 @@ import {
 } from "./screens";
 
 import { useUser } from "./hooks/userContext";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 function AuthenticatedApp() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { currentUser } = useUser();
-  const props = useSpring({ opacity: menuOpen ? 1 : 0 });
+  const props = useSpring({
+    opacity: menuOpen ? 1 : 0,
+    transform: `translate(${menuOpen ? 0 : -100}%)`
+  });
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
