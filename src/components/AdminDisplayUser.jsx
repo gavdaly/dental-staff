@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { client } from "../utils/apiClient";
-
 function formatPhoneNumber(n) {
   return `+1 (${n.slice(0, 3)}) ${n.slice(3, 6)}-${n.slice(6, 10)}`;
 }
