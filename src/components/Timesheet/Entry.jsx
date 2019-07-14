@@ -117,7 +117,7 @@ const EditableEntry = ({ entry }) => {
 };
 
 const HoursEntry = ({ entry }) => {
-  const correction = entry.correction;
+  const { correction } = entry;
 
   switch (entry.state) {
     case "pending":
@@ -127,7 +127,7 @@ const HoursEntry = ({ entry }) => {
             <div className="correction_reason">{correction.reason}</div>
             <div className="time_group">
               <div className="original_start">
-                Original Start:{" "}
+                <span>Original Start: </span>
                 <span>{format(entry.start_time, "h:mm aa")}</span>
               </div>
               <div className="original_end">
@@ -137,11 +137,11 @@ const HoursEntry = ({ entry }) => {
             {correction && (
               <div className="time_group">
                 <div className="requested_start">
-                  Requested Start:{" "}
+                  <span>Requested Start: </span>
                   <span>{format(correction.start_time, "h:mm aa")}</span>
                 </div>
                 <div className="requested_end">
-                  Requested End:{" "}
+                  <span>Requested End: </span>
                   <span>{format(correction.end_time, "h:mm aa")}</span>
                 </div>
               </div>
@@ -180,11 +180,11 @@ const HoursEntry = ({ entry }) => {
           <div className="correction">
             <div className="correction_reason">{correction.reason}</div>
             <div className="original_start">
-              Original Start:{" "}
+              <span>Original Start: </span>
               <span>{format(correction.original_start_time, "h:mm aa")}</span>
             </div>
             <div className="original_end">
-              Original End:{" "}
+              <span>Original End: </span>
               <span>{(correction.original_end_time, "h:mm aa")}</span>
             </div>
             <div className="correction_explanation">{correction.response}</div>
@@ -205,11 +205,11 @@ const HoursEntry = ({ entry }) => {
           <div className="correction">
             <div className="correction_reason">{correction.reason}</div>
             <div className="requested_start">
-              Requested Start:{" "}
+              <span>Requested Start: </span>
               <span>{format(correction.start_time, "h:mm aa")}</span>
             </div>
             <div className="requested_end">
-              Requested End:{" "}
+              <span>Requested End: </span>
               <span>{format(correction.end_time, "h:mm aa")}</span>
             </div>
             <div className="correction_explanation">
