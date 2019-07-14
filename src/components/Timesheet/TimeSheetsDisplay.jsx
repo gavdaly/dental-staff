@@ -15,7 +15,12 @@ export const TimeSheetsDisplay = () => {
               {user.last_name}, {user.first_name}
             </h4>
             {Object.keys(user.time_sheet).map(day => (
-              <DayEntry key={day} day={day} dayEntry={user.time_sheet[day]} />
+              <DayEntry
+                key={day}
+                day={day}
+                dayEntry={user.time_sheet[day]}
+                editable={false}
+              />
             ))}
           </div>
         ))}

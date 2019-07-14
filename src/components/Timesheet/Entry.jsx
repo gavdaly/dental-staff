@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { useTimeSheet } from "../../hooks/timeSheetContext";
+import { useTimeSheets } from "../../hooks/timeSheetsContext";
 
 export const Entries = ({ entries }) => (
   <div className="entires">
@@ -10,12 +11,12 @@ export const Entries = ({ entries }) => (
   </div>
 );
 
-export const DayEntry = ({ dayEntry, day }) => (
+export const DayEntry = ({ dayEntry, day, editable = true }) => (
   <div className="date_entry">
     <div className="entry_date">{day}</div>
     <div>
       {dayEntry.map(entry => (
-        <Entry key={entry.id} entry={entry} />
+        <Entry key={entry.id} entry={entry} editable={editable} />
       ))}
     </div>
   </div>
@@ -61,7 +62,7 @@ const CorrectingEntry = ({ setIsCorrecting, start, end, id }) => {
           />
         </p>
         <p>
-          }<label htmlFor="end">End Time</label>
+          <label htmlFor="end">End Time</label>
           <input
             id="end"
             type="time"
@@ -116,40 +117,45 @@ const EditableEntry = ({ entry }) => {
   );
 };
 
-const HoursEntry = ({ entry }) => {
+const HoursEntry = ({ entry, editable }) => {
   const { correction } = entry;
 
   switch (entry.state) {
     case "pending":
-      return (
-        <div className="entry time state_pending">
-          <div className="correction">
-            <div className="correction_reason">{correction.reason}</div>
-            <div className="time_group">
-              <div className="original_start">
-                <span>Original Start: </span>
-                <span>{format(entry.start_time, "h:mm aa")}</span>
-              </div>
-              <div className="original_end">
-                Original End: <span>{format(entry.end_time, "h:mm aa")}</span>
-              </div>
-            </div>
-            {correction && (
+      if (editable) {
+        return (
+          <div id={`pending${entry.id}`} className="entry time state_pending">
+            <div className="correction">
+              <div className="correction_reason">{correction.reason}</div>
               <div className="time_group">
-                <div className="requested_start">
-                  <span>Requested Start: </span>
-                  <span>{format(correction.start_time, "h:mm aa")}</span>
+                <div className="original_start">
+                  <span>Original Start: </span>
+                  <span>{format(entry.start_time, "h:mm aa")}</span>
                 </div>
-                <div className="requested_end">
-                  <span>Requested End: </span>
-                  <span>{format(correction.end_time, "h:mm aa")}</span>
+                <div className="original_end">
+                  Original End: <span>{format(entry.end_time, "h:mm aa")}</span>
                 </div>
               </div>
-            )}
+              {correction && (
+                <div className="time_group">
+                  <div className="requested_start">
+                    <span>Requested Start: </span>
+                    <span>{format(correction.start_time, "h:mm aa")}</span>
+                  </div>
+                  <div className="requested_end">
+                    <span>Requested End: </span>
+                    <span>{format(correction.end_time, "h:mm aa")}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="state">{entry.state}</div>
           </div>
-          <div className="state">{entry.state}</div>
-        </div>
-      );
+        );
+      } else {
+        return <EditPending entry={entry} />;
+      }
+
     case "finalized":
       return (
         <div className="entry time state_finalized">
@@ -166,7 +172,24 @@ const HoursEntry = ({ entry }) => {
         </div>
       );
     case "editable":
-      return <EditableEntry entry={entry} />;
+      if (editable) {
+        return <EditableEntry entry={entry} />;
+      } else {
+        return (
+          <div className="entry time state_editable">
+            <div className="timeGroup">
+              <div className="time_start">
+                Start: <span>{format(entry.start_time, "h:mm aa")}</span>
+              </div>
+              <div className="time_end">
+                End: <span>{format(entry.end_time, "h:mm aa")}</span>
+              </div>
+            </div>
+            <div className="state editable">Edit</div>
+          </div>
+        );
+      }
+
     case "accepted":
       return (
         <div className="entry time state_accepted">
@@ -265,10 +288,10 @@ const AdjustmentEntry = ({ entry }) => {
   );
 };
 
-export const Entry = ({ entry }) => {
+export const Entry = ({ entry, editable }) => {
   switch (entry.type) {
     case "hours":
-      return <HoursEntry entry={entry} />;
+      return <HoursEntry entry={entry} editable={editable} />;
     case "vacation":
       return <VacationEntry entry={entry} />;
     case "adjustment":
@@ -276,4 +299,56 @@ export const Entry = ({ entry }) => {
     default:
       new Error(`incorrect entry type: ${JSON.stringify(entry)}`);
   }
+};
+
+const EditPending = ({ entry }) => {
+  const { verifyEntry } = useTimeSheets();
+  const [reason, setReason] = useState("");
+  const { correction } = entry;
+
+  function accept() {
+    verifyEntry({ id: entry.id, accepted: true, reasponse: reason });
+  }
+
+  function decline() {
+    verifyEntry({ id: entry.id, accepted: false, reasponse: reason });
+  }
+
+  return (
+    <div id={`pending${entry.id}`} className="entry time state_pending">
+      <div className="correction">
+        <div className="correction_reason">{correction.reason}</div>
+        <div className="time_group">
+          <div className="original_start">
+            <span>Original Start: </span>
+            <span>{format(entry.start_time, "h:mm aa")}</span>
+          </div>
+          <div className="original_end">
+            Original End: <span>{format(entry.end_time, "h:mm aa")}</span>
+          </div>
+        </div>
+        {correction && (
+          <div className="time_group">
+            <div className="requested_start">
+              <span>Requested Start: </span>
+              <span>{format(correction.start_time, "h:mm aa")}</span>
+            </div>
+            <div className="requested_end">
+              <span>Requested End: </span>
+              <span>{format(correction.end_time, "h:mm aa")}</span>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="state">{entry.state}</div>
+      <form>
+        <textarea
+          onChange={event => setReason(event.target.reason)}
+          value={reason}
+        />
+        <button onClick={accept}>Accept</button>
+        <button onClick={decline}>Decline</button>
+      </form>
+    </div>
+  );
 };

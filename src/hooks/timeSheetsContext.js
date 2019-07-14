@@ -14,6 +14,13 @@ function TimeSheetsProvider(props) {
     start: "2017-01-01",
     end: "2020-12-31"
   });
+  const [pending, setPending] = useState([]);
+  const [response, setResponse] = useState({
+    users: [],
+    assignations: [],
+    adjustments: [],
+    corrections: []
+  });
 
   useEffect(() => {
     updateTimeSheet();
@@ -27,12 +34,17 @@ function TimeSheetsProvider(props) {
       {}
     );
     const fts = generateTimesheet(response.users, response);
+    const pend = response.assignations.filter(
+      entry => entry.state === "pending"
+    );
+    setPending(pend);
+    setResponse(response);
     setTimeSheetsData(fts);
   }
 
   async function verifyEntry(state) {
-    const response = await client("PUT", `/staff/missing_assignation`, {
-      body: { entry: { ...state } }
+    const response = await client("PUT", `/admin/corrections`, {
+      body: { correction: { ...state } }
     });
     return response;
   }
@@ -52,7 +64,9 @@ function TimeSheetsProvider(props) {
         setDateRange,
         updateTimeSheet,
         verifyEntry,
-        verifyVacation
+        verifyVacation,
+        response,
+        pending
       }}
       {...props}
     />
