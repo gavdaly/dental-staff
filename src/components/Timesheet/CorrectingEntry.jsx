@@ -5,22 +5,26 @@ export const CorrectingEntry = ({ setIsCorrecting, start, end, id }) => {
   const [formState, setFormState] = useState("invalid");
   const [value, setValue] = useState({ start, end, reason: "" });
   const { correctEntry } = useTimeSheet();
+
   function submit(event) {
     event.preventDefault();
     setFormState("submitting");
     correctEntry({ ...value, id });
   }
+
   useEffect(() => {
     (async () => {
       // const isValid = await validate({ startTime, endTime, reason });
       if (true) setFormState("valid");
     })();
   }, [value]);
+
   function cancel(event) {
     event.preventDefault();
     setIsCorrecting(false);
     setValue({ start, end, reason: "" });
   }
+
   return (
     <>
       <div className="timeGroup">

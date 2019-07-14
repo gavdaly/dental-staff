@@ -7,10 +7,10 @@ export const EditPending = ({ entry }) => {
   const [reason, setReason] = useState("");
   const { correction } = entry;
   function accept() {
-    verifyEntry({ id: entry.id, accepted: true, reasponse: reason });
+    verifyEntry({ id: entry.id, accepted: true, response: reason });
   }
   function decline() {
-    verifyEntry({ id: entry.id, accepted: false, reasponse: reason });
+    verifyEntry({ id: entry.id, accepted: false, response: reason });
   }
   return (
     <div id={`pending${entry.id}`} className="entry time state_pending">

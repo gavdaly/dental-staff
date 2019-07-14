@@ -43,7 +43,7 @@ function TimeSheetsProvider(props) {
   }
 
   async function verifyEntry(state) {
-    const response = await client("PUT", `/admin/corrections`, {
+    const response = await client("POST", `/admin/corrections`, {
       body: { correction: { ...state } }
     });
     return response;
