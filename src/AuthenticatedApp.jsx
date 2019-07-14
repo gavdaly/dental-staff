@@ -37,6 +37,7 @@ function AuthenticatedApp() {
   }
   return (
     <AppWrapper>
+      {console.log("ROLE", role)}
       <Header>
         <button
           style={{

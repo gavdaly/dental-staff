@@ -10,6 +10,7 @@ function TimeSheetsProvider(props) {
   const [timeSheetsData, setTimeSheetsData] = useState({
     timesheet: {}
   });
+
   const [dateRange, setDateRange] = useState({
     start: "2017-01-01",
     end: "2020-12-31"
@@ -50,10 +51,19 @@ function TimeSheetsProvider(props) {
     return response;
   }
 
-  async function verifyVacation(state) {
-    const response = await client("PUT", ``, {
-      body: { vacation: { ...state } }
+  async function createAdjustment(state) {
+    const response = await client("POST", `/admin/adjustments`, {
+      body: { adjustment: { ...state } }
     });
+    // updateTimeSheet();
+    return response;
+  }
+
+  async function updateAdjustment(state) {
+    const response = await client("PUT", `/admin/adjustments/${state.id}`, {
+      body: { adjustment: { ...state } }
+    });
+    updateTimeSheet();
     return response;
   }
 
@@ -65,7 +75,8 @@ function TimeSheetsProvider(props) {
         setDateRange,
         updateTimeSheet,
         verifyEntry,
-        verifyVacation,
+        updateAdjustment,
+        createAdjustment,
         response,
         pending
       }}

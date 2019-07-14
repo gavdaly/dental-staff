@@ -7,15 +7,26 @@ export const TimeSheetDashboard = () => {
   const [adjustmentForm, setAdjustmentForm] = useState({
     reason: "",
     user_id: "",
-    hours: ""
+    duration: "",
+    date: ""
   });
   const {
+    createAdjustment,
     pending,
     response: { users }
   } = useTimeSheets();
 
   function addAdjustment(event) {
     event.preventDefault();
+    createAdjustment({
+      user_id: adjustmentForm.user_id,
+      start_date: adjustmentForm.date,
+      end_date: adjustmentForm.date,
+      duration: adjustmentForm.duration,
+      response: adjustmentForm.reason,
+      category: "admin",
+      state: "finalized"
+    });
     console.log(adjustmentForm);
   }
 
@@ -63,10 +74,24 @@ export const TimeSheetDashboard = () => {
                 onChange={event =>
                   setAdjustmentForm({
                     ...adjustmentForm,
-                    hours: event.target.value
+                    duration: event.target.value
                   })
                 }
-                value={adjustmentForm.hours}
+                value={adjustmentForm.duration}
+              />
+            </div>
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                id="date"
+                type="date"
+                value={adjustmentForm.date}
+                onChange={event =>
+                  setAdjustmentForm({
+                    ...adjustmentForm,
+                    date: event.target.value
+                  })
+                }
               />
             </div>
 

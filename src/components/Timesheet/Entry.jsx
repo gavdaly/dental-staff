@@ -243,9 +243,7 @@ export const Entry = ({ entry, editable }) => {
   switch (entry.type) {
     case "hours":
       return <HoursEntry entry={entry} editable={editable} />;
-    case "vacation":
-      return <VacationEntry entry={entry} />;
-    case "adjustment":
+    case "admin" || "vacation" || "statuatory":
       return <AdjustmentEntry entry={entry} />;
     default:
       new Error(`incorrect entry type: ${JSON.stringify(entry)}`);
