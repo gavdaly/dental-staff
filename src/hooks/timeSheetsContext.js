@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 
-import { userTimeSheet } from "../utils/timeSheetCalc";
+import { generateTimesheet } from "../utils/timeSheetCalc";
 
 import client from "../utils/apiClient";
 
@@ -26,13 +26,13 @@ function TimeSheetsProvider(props) {
       `/admin/timesheets?start=${dateRange.start}&end=${dateRange.end}`,
       {}
     );
-    const format = userTimeSheet(response);
-    setTimeSheetsData(format);
+    const fts = generateTimesheet(response.users, response);
+    setTimeSheetsData(fts);
   }
 
   async function verifyEntry(state) {
     const response = await client("PUT", `/staff/missing_assignation`, {
-      body: { missing_assignation: { ...state } }
+      body: { entry: { ...state } }
     });
     return response;
   }

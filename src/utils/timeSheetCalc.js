@@ -55,25 +55,28 @@ const sortUsers = users => {
 };
 
 const fullTimesheet = (users, data) => {
-  return users.map(user => {
-    const userHours = data.filter(item => item.key === user.log_in_key);
+  const ts = users.map(user => {
+    const userHours = data.filter(item => item.key === user.key);
     const userVacatonAndAdjustments = data.filter(
       item => item.user_id === user.id
     );
     const userData = [...userHours, ...userVacatonAndAdjustments].sort(
       (a, b) => a.start - b.start
     );
+    const time_sheet = weeklyTimeSheet(userData);
+    const length = Object.keys(time_sheet);
+    if (length === 0) return { weekly_summary: [], time_sheet };
     return {
       ...user,
       weekly_summary: weeklySummary(userData),
-      time_sheet: weeklyTimeSheet(userData)
+      time_sheet
     };
   });
+  return ts;
 };
 
 export const userTimeSheet = data => {
   if (!data) return null;
-  console.log(data);
   const d = mergeData(data);
   return {
     weeklySummary: weeklySummary(d),
@@ -107,5 +110,5 @@ const weeklyTimeSheet = userData => {
 };
 
 export const generateTimesheet = (users, data) => {
-  fullTimesheet(sortUsers(users), mergeData(data));
+  return fullTimesheet(sortUsers(users), mergeData(data));
 };

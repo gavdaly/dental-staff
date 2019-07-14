@@ -88,18 +88,16 @@ const EditableEntry = ({ entry }) => {
   const start = format(entry.start_time, "HH:mm");
   const end = format(entry.end_time, "HH:mm");
 
-  const displayStart = format(entry.start_time, "h:mm aa");
-  const displayEnd = format(entry.end_time, "h:mm aa");
   const [isCorrecting, setIsCorrecting] = useState(false);
 
   return (
     <div className="entry time state_editable">
       <div className="timeGroup">
         <div className="time_start">
-          Start: <span>{displayStart}</span>
+          Start: <span>{format(entry.start_time, "h:mm aa")}</span>
         </div>
         <div className="time_end">
-          End: <span>{displayEnd}</span>
+          End: <span>{format(entry.end_time, "h:mm aa")}</span>
         </div>
       </div>
 
@@ -119,22 +117,8 @@ const EditableEntry = ({ entry }) => {
 };
 
 const HoursEntry = ({ entry }) => {
-  const displayStart = format(entry.start_time, "h:mm aa");
-  const displayEnd = format(entry.end_time, "h:mm aa");
-
   const correction = entry.correction;
 
-  var correctionStart = "error";
-  var correctionEnd = "error";
-  var originalStart = "error";
-  var originalEnd = "error";
-
-  if (correction) {
-    correctionStart = format(correction.start_time, "h:mm aa");
-    correctionEnd = format(correction.end_time, "h:mm aa");
-    originalStart = format(correction.original_start_time, "h:mm aa");
-    originalEnd = format(correction.original_end_time, "h:mm aa");
-  }
   switch (entry.state) {
     case "pending":
       return (
@@ -143,19 +127,22 @@ const HoursEntry = ({ entry }) => {
             <div className="correction_reason">{correction.reason}</div>
             <div className="time_group">
               <div className="original_start">
-                Original Start: <span>{displayStart}</span>
+                Original Start:{" "}
+                <span>{format(entry.start_time, "h:mm aa")}</span>
               </div>
               <div className="original_end">
-                Original End: <span>{displayEnd}</span>
+                Original End: <span>{format(entry.end_time, "h:mm aa")}</span>
               </div>
             </div>
             {correction && (
               <div className="time_group">
                 <div className="requested_start">
-                  Requested Start: <span>{correctionStart}</span>
+                  Requested Start:{" "}
+                  <span>{format(correction.start_time, "h:mm aa")}</span>
                 </div>
                 <div className="requested_end">
-                  Requested End: <span>{correctionEnd}</span>
+                  Requested End:{" "}
+                  <span>{format(correction.end_time, "h:mm aa")}</span>
                 </div>
               </div>
             )}
@@ -168,10 +155,10 @@ const HoursEntry = ({ entry }) => {
         <div className="entry time state_finalized">
           <div className="time_group">
             <div className="time_start">
-              Start: <span>{displayStart}</span>
+              Start: <span>{format(entry.start_time, "h:mm aa")}</span>
             </div>
             <div className="time_end">
-              End: <span>{displayEnd}</span>
+              End: <span>{format(entry.end_time, "h:mm aa")}</span>
             </div>
           </div>
 
@@ -184,19 +171,21 @@ const HoursEntry = ({ entry }) => {
       return (
         <div className="entry time state_accepted">
           <div className="time_start">
-            Start: <span>{displayStart}</span>
+            Start: <span>{format(entry.start_time, "h:mm aa")}</span>
           </div>
           <div className="time_end">
-            End: <span>{displayEnd}</span>
+            End: <span>{format(entry.end_time, "h:mm aa")}</span>
           </div>
 
           <div className="correction">
             <div className="correction_reason">{correction.reason}</div>
             <div className="original_start">
-              Original Start: <span>{originalStart}</span>
+              Original Start:{" "}
+              <span>{format(correction.original_start_time, "h:mm aa")}</span>
             </div>
             <div className="original_end">
-              Original End: <span>{originalEnd}</span>
+              Original End:{" "}
+              <span>{(correction.original_end_time, "h:mm aa")}</span>
             </div>
             <div className="correction_explanation">{correction.response}</div>
           </div>
@@ -207,25 +196,36 @@ const HoursEntry = ({ entry }) => {
       return (
         <div className="entry time state_rejected">
           <div className="time_start">
-            Start: <span>{displayStart}</span>
+            Start: <span>{format(entry.start_time, "h:mm aa")}</span>
           </div>
           <div className="time_end">
-            End: <span>{displayEnd}</span>
+            End: <span>{format(entry.end_time, "h:mm aa")}</span>
           </div>
 
           <div className="correction">
             <div className="correction_reason">{correction.reason}</div>
             <div className="requested_start">
-              Requested Start: <span>{correctionStart}</span>
+              Requested Start:{" "}
+              <span>{format(correction.start_time, "h:mm aa")}</span>
             </div>
             <div className="requested_end">
-              Requested End: <span>{correctionEnd}</span>
+              Requested End:{" "}
+              <span>{format(correction.end_time, "h:mm aa")}</span>
             </div>
             <div className="correction_explanation">
               {correction.explanation}
             </div>
           </div>
           <div className="state">Rejected</div>
+        </div>
+      );
+    case "active":
+      return (
+        <div className="entry time state_active">
+          <div className="time_start">
+            Start: <span>{format(entry.start_time, "h:mm aa")}</span>
+          </div>
+          <div className="state">{entry.state}</div>
         </div>
       );
     default:
