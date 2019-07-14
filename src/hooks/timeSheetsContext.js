@@ -46,6 +46,7 @@ function TimeSheetsProvider(props) {
     const response = await client("POST", `/admin/corrections`, {
       body: { correction: { ...state } }
     });
+    updateTimeSheet();
     return response;
   }
 
