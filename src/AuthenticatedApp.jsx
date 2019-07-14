@@ -34,7 +34,6 @@ function AuthenticatedApp() {
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
-    console.log("Menu", menuOpen);
   }
   return (
     <AppWrapper>
