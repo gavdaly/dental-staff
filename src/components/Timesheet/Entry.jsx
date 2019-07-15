@@ -206,26 +206,6 @@ const HoursEntry = ({ entry, editable }) => {
   }
 };
 
-const VacationEntry = ({ entry }) => {
-  if (entry.state === "canceled") {
-    return (
-      <div className="entry vacation vacation_canceled">
-        <div className="state">Canceled</div>
-      </div>
-    );
-  }
-  return (
-    <div className="entry vacation vacation_accepted">
-      {entry.state !== "rejected" && (
-        <div className="hours">Hours requested: {entry.duration}h</div>
-      )}
-      <div className="reason">{entry.comment}</div>
-      {entry.response && <div className="response">Ok, Have a good time</div>}
-      <div className="state">{entry.state}</div>
-    </div>
-  );
-};
-
 const AdjustmentEntry = ({ entry }) => {
   const classNames = `entry ${entry.category}`;
   return (
