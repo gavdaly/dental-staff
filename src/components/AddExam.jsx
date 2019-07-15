@@ -1,6 +1,6 @@
 import React from "react";
 
-export const addExam = () => {
+export const AddExam = () => {
   return (
     <form onSubmit={e => console.log(e)}>
       <div className="coe form-inputs">
@@ -1042,4 +1042,4 @@ export const addExam = () => {
   );
 };
 
-export default addExam;
+export default AddExam;

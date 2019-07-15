@@ -81,7 +81,7 @@ function AuthenticatedApp() {
           <Dashboard path="/" />
           <Timesheet path="timesheet" />
           <Timesheets path="timesheets" />
-          <Exam path="exam" />
+          <Exam path="exam/*" />
           <Exams path="exams" />
           <Notes path="notes" />
           <Schedule path="schedule" />
