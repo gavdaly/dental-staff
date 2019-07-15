@@ -59,7 +59,7 @@ const initialState = {
   },
   periodontalAssessmentMag: "",
   periodontalAssessmentCalculusSub: "Scanty",
-  periodontalAsessmentCalculusSupra: "Scanty",
+  periodontalAssessmentCalculusSupra: "Scanty",
   periodontalAssessmentOhiAids: "",
   periodontalAssessmentOhiFrequency: "",
   periodontalAssessmentRiskFactors: {
@@ -100,15 +100,15 @@ const initialState = {
   radiographyImpactedTeeth: "",
   radiographyPoorMargins: "",
   radiographyChartingCompletedOn: today,
-  radiographyRecomendedPreventiveThearpy: "",
+  radiographyRecommendedPreventiveTherapy: "",
   hardTissueExamChartingCompletedOn: today,
   hardTissueExamCarriesRiskAssessment: "low",
-  recomendedPreventiveThearpySalvaryTest: "",
-  recomendedPreventiveThearpyClorhexidineRinse: "",
-  recomendedPreventiveThearpyFlouride: "none",
-  recomendedPreventiveThearpyRadiographs: "12-18m",
-  recomendedPreventiveThearpyExamFrequency: "9m",
-  recomendedPreventiveThearpyAdjuncts: "none",
+  recommendedPreventiveTherapySalvaryTest: "",
+  recommendedPreventiveTherapyClorhexidineRinse: "",
+  recommendedPreventiveTherapyFluoride: "none",
+  recommendedPreventiveTherapyRadiographs: "12-18m",
+  RecommendedPreventiveTherapyExamFrequency: "9m",
+  recommendedPreventiveTherapyAdjuncts: "none",
   diagnosisCarriesPresent: "",
   diagnosisCarriesInTreatmentPlan: "",
   diagnosisFailingRestorationPresent: "",
@@ -965,16 +965,16 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label htmlFor="periodontalAsessmentCalculusSupra">
+            <label htmlFor="periodontalAssessmentCalculusSupra">
               Calculus Supra
             </label>
             <select
-              id="periodontalAsessmentCalculusSupra"
-              value={form.periodontalAsessmentCalculusSupra}
+              id="periodontalAssessmentCalculusSupra"
+              value={form.periodontalAssessmentCalculusSupra}
               onChange={event =>
                 setForm({
                   ...form,
-                  periodontalAsessmentCalculusSupra: event.target.value
+                  periodontalAssessmentCalculusSupra: event.target.value
                 })
               }
             >
@@ -986,7 +986,7 @@ export const AddExam = () => {
 
           <div className="input">
             <label htmlFor="periodontalAssessmentOhiAids">
-              Oral Hyigene Aids
+              Oral Hygiene Aids
             </label>
             <input
               id="periodontalAssessmentOhiAids"
@@ -1003,7 +1003,7 @@ export const AddExam = () => {
 
           <div className="input">
             <label htmlFor="periodontalAssessmentOhiFrequency">
-              Oral Hyigene Frequency
+              Oral Hygiene Frequency
             </label>
             <input
               id="periodontalAssessmentOhiFrequency"
@@ -1343,10 +1343,10 @@ export const AddExam = () => {
             />
           </div>
 
-          <h2>Recomended Treatment</h2>
+          <h2>Recommended Treatment</h2>
           <div className="input">
             <label htmlFor="periodontalAssessmentTreatmentScalingAppointments">
-              Scaling Appointments with Anestitic
+              Scaling Appointments with Anesthetic
             </label>
             <select
               id="periodontalAssessmentTreatmentScalingAppointments"
@@ -1367,7 +1367,7 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label htmlFor="">Perio Maintance Frequency</label>
+            <label htmlFor="">Perio Maintenance Frequency</label>
             <select
               id="periodontalAssessmentPreatmentPerioMaintance"
               value={form.periodontalAssessmentPreatmentPerioMaintance}
@@ -1622,18 +1622,18 @@ export const AddExam = () => {
             />
           </div>
           <div className="input">
-            <label htmlFor="radiographyRecomendedPreventiveThearpy">
-              Recomended Preventive Thearpy
+            <label htmlFor="radiographyRecommendedPreventiveTherapy">
+              Recommended Preventive Therapy
             </label>
             <input
               type="text"
-              name="radiographyRecomendedPreventiveThearpy"
-              id="radiographyRecomendedPreventiveThearpy"
-              value={form.radiographyRecomendedPreventiveThearpy}
+              name="radiographyRecommendedPreventiveTherapy"
+              id="radiographyRecommendedPreventiveTherapy"
+              value={form.radiographyRecommendedPreventiveTherapy}
               onChange={event =>
                 setForm({
                   ...form,
-                  radiographyRecomendedPreventiveThearpy: event.target.value
+                  radiographyRecommendedPreventiveTherapy: event.target.value
                 })
               }
             />
@@ -1681,56 +1681,56 @@ export const AddExam = () => {
           </div>
         </div>
 
-        <div className="form_group recomended_preventive_thearpy">
-          <h1>Recomended Preventive Thearpy</h1>
+        <div className="form_group Recommended_preventive_therapy">
+          <h1>Recommended Preventive Therapy</h1>
 
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpySalvaryTest">
+            <label htmlFor="RecommendedPreventiveTherapySalvaryTest">
               Salvary Test
             </label>
             <input
               type="text"
-              name="recomendedPreventiveThearpySalvaryTest"
-              id="recomendedPreventiveThearpySalvaryTest"
-              value={form.recomendedPreventiveThearpySalvaryTest}
+              name="RecommendedPreventiveTherapySalvaryTest"
+              id="RecommendedPreventiveTherapySalvaryTest"
+              value={form.RecommendedPreventiveTherapySalvaryTest}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpySalvaryTest: event.target.value
+                  RecommendedPreventiveTherapySalvaryTest: event.target.value
                 })
               }
             />
           </div>
 
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpyClorhexidineRinse">
+            <label htmlFor="RecommendedPreventiveTherapyClorhexidineRinse">
               Chlorhexidine Rinse
             </label>
             <input
               type="text"
-              name="recomendedPreventiveThearpyClorhexidineRinse"
-              id="recomendedPreventiveThearpyClorhexidineRinse"
-              value={form.recomendedPreventiveThearpyClorhexidineRinse}
+              name="RecommendedPreventiveTherapyClorhexidineRinse"
+              id="RecommendedPreventiveTherapyClorhexidineRinse"
+              value={form.RecommendedPreventiveTherapyClorhexidineRinse}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpyClorhexidineRinse:
+                  RecommendedPreventiveTherapyClorhexidineRinse:
                     event.target.value
                 })
               }
             />
           </div>
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpyFlouride">
-              Flouride
+            <label htmlFor="RecommendedPreventiveTherapyFluoride">
+              Fluoride
             </label>
             <select
-              id="recomendedPreventiveThearpyFlouride"
-              value={form.recomendedPreventiveThearpyFlouride}
+              id="RecommendedPreventiveTherapyFluoride"
+              value={form.RecommendedPreventiveTherapyFluoride}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpyFlouride: event.target.value
+                  RecommendedPreventiveTherapyFluoride: event.target.value
                 })
               }
             >
@@ -1741,16 +1741,16 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpyRadiographs">
+            <label htmlFor="RecommendedPreventiveTherapyRadiographs">
               Radiograph Frequency
             </label>
             <select
-              id="recomendedPreventiveThearpyRadiographs"
-              value={form.recomendedPreventiveThearpyRadiographs}
+              id="RecommendedPreventiveTherapyRadiographs"
+              value={form.RecommendedPreventiveTherapyRadiographs}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpyRadiographs: event.target.value
+                  RecommendedPreventiveTherapyRadiographs: event.target.value
                 })
               }
             >
@@ -1761,16 +1761,16 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpyExamFrequency">
+            <label htmlFor="RecommendedPreventiveTherapyExamFrequency">
               Exam Frequency
             </label>
             <select
-              id="recomendedPreventiveThearpyExamFrequency"
-              value={form.recomendedPreventiveThearpyExamFrequency}
+              id="RecommendedPreventiveTherapyExamFrequency"
+              value={form.RecommendedPreventiveTherapyExamFrequency}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpyExamFrequency: event.target.value
+                  RecommendedPreventiveTherapyExamFrequency: event.target.value
                 })
               }
             >
@@ -1781,16 +1781,16 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label htmlFor="recomendedPreventiveThearpyAdjuncts">
+            <label htmlFor="RecommendedPreventiveTherapyAdjuncts">
               Adjuncts
             </label>
             <select
-              id="recomendedPreventiveThearpyAdjuncts"
-              value={form.recomendedPreventiveThearpyAdjuncts}
+              id="RecommendedPreventiveTherapyAdjuncts"
+              value={form.RecommendedPreventiveTherapyAdjuncts}
               onChange={event =>
                 setForm({
                   ...form,
-                  recomendedPreventiveThearpyAdjuncts: event.target.value
+                  RecommendedPreventiveTherapyAdjuncts: event.target.value
                 })
               }
             >
