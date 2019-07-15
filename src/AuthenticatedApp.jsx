@@ -34,10 +34,10 @@ function AuthenticatedApp() {
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
-    console.log("Menu", menuOpen);
   }
   return (
     <AppWrapper>
+      {console.log("ROLE", role)}
       <Header>
         <button
           style={{

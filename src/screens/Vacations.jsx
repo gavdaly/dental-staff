@@ -1,12 +1,13 @@
 import React from "react";
+import { RequestVacationTIme } from "../components/RequestVacationTIme";
+import { UpcomingVacations } from "../components/UpcomingVacations";
 
 const Vacations = () => {
   return (
-    <div>
-      <div>Upcoming Vacations & Time Off</div>
-      <div>Request Vacation Time</div>
-      <div>Authorize Vacation</div>
-    </div>
+    <>
+      <UpcomingVacations />
+      <RequestVacationTIme />
+    </>
   );
 };
 
