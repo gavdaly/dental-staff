@@ -1,49 +1,197 @@
-import React from "react";
+import React, { useState } from "react";
+
+const today = Date.now();
+
+const initialState = {
+  name: "",
+  healthyAppearance: "Healthy",
+  sex: "Female",
+  lastMedicalHistoryUpdate: today,
+  ASAClassification: "I",
+  chiefComplaint: "exam",
+  extraOralHead: "WNL",
+  extraOralNeck: "WNL",
+  extraOralLymphNodes: "WNL",
+  extraOralSkin: "WNL",
+  TMJCrepitus: "None",
+  TMJPopping: "None",
+  TMJTenderness: "None",
+  TMJPain: "None",
+  TMJMaximumComfortableOpening: "0",
+  TMJDeviation: "",
+  TMJDeviationDirection: "",
+  TMJDeviationAmount: "",
+  intraOralPharynx: "WNL",
+  intraOralTonsils: "WNL",
+  intraOralHardPalate: "WNL",
+  intraOralSoftPalate: "WNL",
+  intraOralFloorOfMouth: "WNL",
+  intraOralLips: "WNL",
+  intraOralTongue: "WNL",
+  intraOralBuccalMucosa: "WNL",
+  intraOralCheeks: "WNL",
+  intraOralOralMucosa: "WNL",
+  intraOralCancerScreen: "WNL",
+  occlusionClass: "I",
+  occlusionOverbite: 0,
+  occlusionOverjet: 0,
+  occlusionCrossbite: "",
+  occlusionCrowding: "",
+  occlusionAttrition: "",
+  occlusionBruxism: "",
+  occlusionErosion: "",
+  denturesUpper: "None",
+  denturesUpperServiceable: false,
+  denturesLower: "None",
+  denturesLowerServiceable: false,
+  periodontalAssessmentGingiva: {
+    Health: false,
+    Hypertrophic: false,
+    Hemorragic: false,
+    Fibrous: false,
+    Edematous: false,
+    Recession: false,
+    Puss: false,
+    Cyanotic: false,
+    Ulcerated: false,
+    Clefting: false,
+    FrenumPull: false
+  },
+  periodontalAssessmentMag: "",
+  periodontalAssessmentCalculusSub: "Scanty",
+  periodontalAsessmentCalculusSupra: "Scanty",
+  periodontalAssessmentOhiAids: "",
+  periodontalAssessmentOhiFrequency: "",
+  periodontalAssessmentRiskFactors: {
+    Age: false,
+    DryMouth: false,
+    Smoking: false,
+    Hormonal: false,
+    Supplements: false,
+    NutritionalHabits: false,
+    SystemicIllness: false,
+    ImmunoCompromised: false,
+    FamilyHistory: false,
+    extraInformation: ""
+  },
+  periodontalAssessmentPerioChartDate: today,
+  periodontalAssessmentGingivitis: "",
+  periodontalAssessmentPeriodontitis: "None",
+  periodontalAssessmentPrognosisMaxillary: "Good",
+  periodontalAssessmentPrognosisMaxillaryConcerns: "",
+  periodontalAssessmentPrognosisMandibular: "Good",
+  periodontalAssessmentPrognosisMandibularConcerns: "",
+  periodontalAssessmentTreatmentScalingAppointments: "0",
+  periodontalAssessmentPreatmentPerioMaintance: "6",
+  periodontalAssessmentTreatmentHomeCare: {
+    Brushing: true,
+    InterdentalCleaning: true
+  },
+  periodontalAssessmentTreatmentAdjucts: {
+    Periostat: false,
+    Oravital: false,
+    Arestin: false
+  },
+  periodontalAssessmentTreatmentPeriodontistReferral: false,
+  radiographyWidenedPdl: "",
+  radiographyPaLesions: "",
+  radiographyBoneLossHorizontal: "",
+  radiographyBoneLossVertical: "",
+  radiographyImpactedTeeth: "",
+  radiographyPoorMargins: "",
+  radiographyChartingCompletedOn: today,
+  radiographyRecomendedPreventiveThearpy: "",
+  hardTissueExamChartingCompletedOn: today,
+  hardTissueExamCarriesRiskAssessment: "low",
+  recomendedPreventiveThearpySalvaryTest: "",
+  recomendedPreventiveThearpyClorhexidineRinse: "",
+  recomendedPreventiveThearpyFlouride: "none",
+  recomendedPreventiveThearpyRadiographs: "12-18m",
+  recomendedPreventiveThearpyExamFrequency: "9m",
+  recomendedPreventiveThearpyAdjuncts: "none",
+  diagnosisCarriesPresent: "",
+  diagnosisCarriesInTreatmentPlan: "",
+  diagnosisFailingRestorationPresent: "",
+  diagnosisFailingRestorationInTreatmentPlan: "",
+  diagnosisEndodonticPresent: "",
+  diagnosisEndodonticInTreatmentPlan: "",
+  diagnosisMissingTeethPresent: "",
+  diagnosisMissingTeethInTreatmentPlan: ""
+};
 
 export const AddExam = () => {
+  const [form, setForm] = useState(initialState);
+  function onSubmit(event) {
+    event.preventDefault();
+    console.log(event);
+  }
   return (
-    <form onSubmit={e => console.log(e)}>
+    <form onSubmit={onSubmit}>
       <div className="coe form-inputs">
         <div className="form_group">
           <div className="input">
-            <label for="name">Patient Name</label>
+            <label htmlFor="name">Patient Name</label>
             <input
               type="text"
               id="name"
               name="name"
               placeholder="patient name"
+              value={form.name}
+              onChange={event => setForm({ ...form, name: event.target.value })}
             />
           </div>
-
           <div className="input">
-            <label for="health_appearance">Health Appearance</label>
-            <select id="health_appearance">
+            <label htmlFor="healthAppearance">Health Appearance</label>
+            <select
+              id="healthAppearance"
+              value={form.healthyAppearance}
+              onChange={event =>
+                setForm({ ...form, healthyAppearance: event.target.value })
+              }
+            >
               <option value="Healthy">Healthy</option>
               <option value="Poor Health">Poor Health</option>
             </select>
           </div>
           <div className="input">
-            <label for="sex">Sex</label>
-            <select id="sex">
+            <label htmlFor="sex">Sex</label>
+            <select
+              id="sex"
+              value={form.sex}
+              onChange={event => setForm({ ...form, sex: event.target.value })}
+            >
               <option value="Female">Female</option>
               <option value="Male">Male</option>
             </select>
           </div>
 
           <div className="input">
-            <label for="lastMedicalHistoryUpdate">
+            <label htmlFor="lastMedicalHistoryUpdate">
               Last Medical History Update
             </label>
             <input
               type="date"
               id="lastMedicalHistoryUpdate"
               name="lastMedicalHistoryUpdate"
+              value={form.lastMedicalHistoryUpdate}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  lastMedicalHistoryUpdate: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
-            <label for="ASAClassification">ASA Classification</label>
-            <select id="ASAClassification">
+            <label htmlFor="ASAClassification">ASA Classification</label>
+            <select
+              id="ASAClassification"
+              value={form.ASAClassification}
+              onChange={event =>
+                setForm({ ...form, ASAClassification: event.target.value })
+              }
+            >
               <option value="I">I</option>
               <option value="II">II</option>
               <option value="III">III</option>
@@ -52,8 +200,16 @@ export const AddExam = () => {
           </div>
 
           <div className="input">
-            <label for="chiefComplaint">Chief Complaint</label>
-            <input type="text" id="chiefComplaint" name="chiefComplaint" />
+            <label htmlFor="chiefComplaint">Chief Complaint</label>
+            <input
+              type="text"
+              id="chiefComplaint"
+              name="chiefComplaint"
+              value={form.chiefComplaint}
+              onChange={event =>
+                setForm({ ...form, chiefComplaint: event.target.value })
+              }
+            />
           </div>
         </div>
 
@@ -62,12 +218,28 @@ export const AddExam = () => {
 
           <div className="input">
             <label htmlFor="extraOralHead">Head</label>
-            <input type="text" id="extraOralHead" name="extraOralHead" />
+            <input
+              type="text"
+              id="extraOralHead"
+              name="extraOralHead"
+              value={form.extraOralHead}
+              onChange={event =>
+                setForm({ ...form, extraOralHead: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
             <label htmlFor="extraOralNeck">Neck</label>
-            <input type="text" name="extraOralNeck" id="extraOralNeck" />
+            <input
+              type="text"
+              name="extraOralNeck"
+              id="extraOralNeck"
+              value={form.extraOralNeck}
+              onChange={event =>
+                setForm({ ...form, extraOralNeck: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
@@ -76,18 +248,36 @@ export const AddExam = () => {
               type="text"
               name="extraOralLymphNodes"
               id="extraOralLymphNodes"
+              value={form.extraOralLymphNodes}
+              onChange={event =>
+                setForm({ ...form, extraOralLymphNodes: event.target.value })
+              }
             />
           </div>
 
           <div className="input">
-            <label for="extraOralSkin">Skin</label>
-            <input type="text" name="extraOralSkin" id="extraOralSkin" />
+            <label htmlFor="extraOralSkin">Skin</label>
+            <input
+              type="text"
+              name="extraOralSkin"
+              id="extraOralSkin"
+              value={form.extraOralSkin}
+              onChange={event =>
+                setForm({ ...form, extraOralSkin: event.target.value })
+              }
+            />
           </div>
 
           <h1>TMJ</h1>
           <div className="input">
-            <label for="TMJCrepitus">Crepitus</label>
-            <select id="TMJCrepitus">
+            <label htmlFor="TMJCrepitus">Crepitus</label>
+            <select
+              id="TMJCrepitus"
+              value={form.TMJCrepitus}
+              onChange={event =>
+                setForm({ ...form, TMJCrepitus: event.target.value })
+              }
+            >
               <option value="None">none</option>
               <option value="Right">Right</option>
               <option value="Left">Left</option>
@@ -96,8 +286,14 @@ export const AddExam = () => {
           </div>
 
           <div className="input">
-            <label for="TMJPopping">Popping</label>
-            <select id="PMJPopping">
+            <label htmlFor="TMJPopping">Popping</label>
+            <select
+              id="TMJPopping"
+              value={form.TMJPopping}
+              onChange={event =>
+                setForm({ ...form, TMJPopping: event.target.value })
+              }
+            >
               <option value="None">none</option>
               <option value="Right">Right</option>
               <option value="Left">Left</option>
@@ -106,8 +302,14 @@ export const AddExam = () => {
           </div>
 
           <div className="input">
-            <label for="TMJTenderness">Tenderness</label>
-            <select id="TMJTenderness">
+            <label htmlFor="TMJTenderness">Tenderness</label>
+            <select
+              id="TMJTenderness"
+              value={form.TMJTenderness}
+              onChange={event =>
+                setForm({ ...form, TMJTenderness: event.target.value })
+              }
+            >
               <option value="None">none</option>
               <option value="Right">Right</option>
               <option value="Left">Left</option>
@@ -116,8 +318,14 @@ export const AddExam = () => {
           </div>
 
           <div className="input">
-            <label for="TMJPain">Pain</label>
-            <select id="PMJPain">
+            <label htmlFor="TMJPain">Pain</label>
+            <select
+              id="TMJPain"
+              value={form.TMJPain}
+              onChange={event =>
+                setForm({ ...form, TMJPain: event.target.value })
+              }
+            >
               <option value="None">none</option>
               <option value="Right">Right</option>
               <option value="Left">Left</option>
@@ -133,12 +341,27 @@ export const AddExam = () => {
               type="number"
               id="TMJMaximumComfortableOpening"
               name="TMJMaximumComfortableOpening"
+              value={form.TMJMaximumComfortableOpening}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  TMJMaximumComfortableOpening: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
             <label htmlFor="TMJDeviation">Deviation</label>
-            <input type="text" id="TMJDeviation" name="TMJDeviation" />
+            <input
+              type="text"
+              id="TMJDeviation"
+              name="TMJDeviation"
+              value={form.TMJDeviation}
+              onChange={event =>
+                setForm({ ...form, TMJDeviation: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
@@ -147,6 +370,13 @@ export const AddExam = () => {
               type="text"
               id="TMJDeviationDirection"
               name="TMJDeviationDirection"
+              value={form.TMJDeviationDirection}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  TMJDeviationDirection: event.target.value
+                })
+              }
             />
           </div>
 
@@ -156,6 +386,10 @@ export const AddExam = () => {
               type="text"
               id="TMJDeviationAmount"
               name="TMJDeviationAmount"
+              value={form.TMJDeviationAmount}
+              onChange={event =>
+                setForm({ ...form, TMJDeviationAmount: event.target.value })
+              }
             />
           </div>
         </div>
@@ -164,12 +398,28 @@ export const AddExam = () => {
           <h1>Intra Oral</h1>
           <div className="input">
             <label htmlFor="intraOralPharynx">Pharynx</label>
-            <input type="text" id="intraOralPharynx" name="intraOralPharynx" />
+            <input
+              type="text"
+              id="intraOralPharynx"
+              name="intraOralPharynx"
+              value={form.intraOralPharynx}
+              onChange={event =>
+                setForm({ ...form, intraOralPharynx: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
             <label htmlFor="intraOralTonsils">Tonsils</label>
-            <input type="text" id="intraOralTonsils" name="intraOralTonsils" />
+            <input
+              type="text"
+              id="intraOralTonsils"
+              name="intraOralTonsils"
+              value={form.intraOralTonsils}
+              onChange={event =>
+                setForm({ ...form, intraOralTonsils: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
@@ -178,6 +428,10 @@ export const AddExam = () => {
               type="text"
               id="intraOralHardPalate"
               name="intraOralHardPalate"
+              value={form.intraOralHardPalate}
+              onChange={event =>
+                setForm({ ...form, intraOralHardPalate: event.target.value })
+              }
             />
           </div>
 
@@ -187,6 +441,10 @@ export const AddExam = () => {
               type="text"
               id="intraOralSoftPalate"
               name="intraOralSoftPalate"
+              value={form.intraOralSoftPalate}
+              onChange={event =>
+                setForm({ ...form, intraOralSoftPalate: event.target.value })
+              }
             />
           </div>
 
@@ -196,17 +454,40 @@ export const AddExam = () => {
               type="text"
               id="intraOralFloorOfMouth"
               name="intraOralFloorOfMouth"
+              value={form.intraOralFloorOfMouth}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  intraOralFloorOfMouth: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
             <label htmlFor="intraOralLips">Lips</label>
-            <input type="text" id="intraOralLips" name="intraOralLips" />
+            <input
+              type="text"
+              id="intraOralLips"
+              name="intraOralLips"
+              value={form.intraOralLips}
+              onChange={event =>
+                setForm({ ...form, intraOralLips: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
             <label htmlFor="intraOralTongue">Tongue</label>
-            <input type="text" id="intraOralTongue" name="intraOralTongue" />
+            <input
+              type="text"
+              id="intraOralTongue"
+              name="intraOralTongue"
+              value={form.intraOralTongue}
+              onChange={event =>
+                setForm({ ...form, intraOralTongue: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
@@ -215,12 +496,27 @@ export const AddExam = () => {
               type="text"
               id="intraOralBuccalMucosa"
               name="intraOralBuccalMucosa"
+              value={form.intraOralBuccalMucosa}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  intraOralBuccalMucosa: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
             <label htmlFor="intraOralCheeks">Cheeks</label>
-            <input type="text" id="intraOralCheeks" name="intraOralCheeks" />
+            <input
+              type="text"
+              id="intraOralCheeks"
+              name="intraOralCheeks"
+              value={form.intraOralCheeks}
+              onChange={event =>
+                setForm({ ...form, intraOralCheeks: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
@@ -229,6 +525,10 @@ export const AddExam = () => {
               type="text"
               id="intraOralOralMucosa"
               name="intraOralOralMucosa"
+              value={form.intraOralOralMucosa}
+              onChange={event =>
+                setForm({ ...form, intraOralOralMucosa: event.target.value })
+              }
             />
           </div>
 
@@ -238,6 +538,13 @@ export const AddExam = () => {
               type="text"
               id="intraOralCancerScreen"
               name="intraOralCancerScreen"
+              value={form.intraOralCancerScreen}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  intraOralCancerScreen: event.target.value
+                })
+              }
             />
           </div>
         </div>
@@ -246,8 +553,14 @@ export const AddExam = () => {
           <h1>Occlusion</h1>
 
           <div className="input">
-            <label for="occlusionClass">Class</label>
-            <select id="occlusionClass">
+            <label htmlFor="occlusionClass">Class</label>
+            <select
+              id="occlusionClass"
+              value={form.occlusionClass}
+              onChange={event =>
+                setForm({ ...form, occlusionClass: event.target.value })
+              }
+            >
               <option value="I">I</option>
               <option value="II">II</option>
               <option value="III">III</option>
@@ -260,6 +573,10 @@ export const AddExam = () => {
               type="number"
               id="occlusionOverbite"
               name="occlusionOverbite"
+              value={form.occlusionOverbite}
+              onChange={event =>
+                setForm({ ...form, occlusionOverbite: event.target.value })
+              }
             />
           </div>
 
@@ -269,6 +586,10 @@ export const AddExam = () => {
               type="number"
               id="occlusionOverjet"
               name="occlusionOverjet"
+              value={form.occlusionOverjet}
+              onChange={event =>
+                setForm({ ...form, occlusionOverjet: event.target.value })
+              }
             />
           </div>
           <div className="input">
@@ -277,6 +598,10 @@ export const AddExam = () => {
               type="text"
               id="occlusionCrossbite"
               name="occlusionCrossbite"
+              value={form.occlusionCrossbite}
+              onChange={event =>
+                setForm({ ...form, occlusionCrossbite: event.target.value })
+              }
             />
           </div>
 
@@ -286,6 +611,10 @@ export const AddExam = () => {
               type="text"
               id="occlusionCrowding"
               name="occlusionCrowding"
+              value={form.occlusionCrowding}
+              onChange={event =>
+                setForm({ ...form, occlusionCrowding: event.target.value })
+              }
             />
           </div>
 
@@ -295,17 +624,37 @@ export const AddExam = () => {
               type="text"
               id="occlusionAttrition"
               name="occlusionAttrition"
+              value={form.occlusionAttrition}
+              onChange={event =>
+                setForm({ ...form, occlusionAttrition: event.target.value })
+              }
             />
           </div>
 
           <div className="input">
             <label htmlFor="occlusionBruxism">Bruxism</label>
-            <input type="text" id="occlusionBruxism" name="occlusionBruxism" />
+            <input
+              type="text"
+              id="occlusionBruxism"
+              name="occlusionBruxism"
+              value={form.occlusionBruxism}
+              onChange={event =>
+                setForm({ ...form, occlusionBruxism: event.target.value })
+              }
+            />
           </div>
 
           <div className="input">
             <label htmlFor="occlusionErosion">Erosion</label>
-            <input type="text" id="occlusionErosion" name="occlusionErosion" />
+            <input
+              type="text"
+              id="occlusionErosion"
+              name="occlusionErosion"
+              value={form.occlusionErosion}
+              onChange={event =>
+                setForm({ ...form, occlusionErosion: event.target.value })
+              }
+            />
           </div>
         </div>
 
@@ -313,8 +662,14 @@ export const AddExam = () => {
           <h1>Dentures</h1>
 
           <div className="input">
-            <label for="denturesUpper">Upper</label>
-            <select id="denturesUpper">
+            <label htmlFor="denturesUpper">Upper</label>
+            <select
+              id="denturesUpper"
+              value={form.denturesUpper}
+              onChange={event =>
+                setForm({ ...form, denturesUpper: event.target.value })
+              }
+            >
               <option value="None">None</option>
               <option value="Partial">Partial</option>
               <option value="Full">Full</option>
@@ -327,12 +682,25 @@ export const AddExam = () => {
               type="checkbox"
               name="denturesUpperServiceable"
               id="denturesUpperServiceable"
+              value={form.denturesUpperServiceable}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  denturesUpperServiceable: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
-            <label for="denturesLower">Lower</label>
-            <select id="denturesLower">
+            <label htmlFor="denturesLower">Lower</label>
+            <select
+              id="denturesLower"
+              value={form.denturesLower}
+              onChange={event =>
+                setForm({ ...form, denturesLower: event.target.value })
+              }
+            >
               <option value="None">None</option>
               <option value="Partial">Partial</option>
               <option value="Full">Full</option>
@@ -345,6 +713,13 @@ export const AddExam = () => {
               type="checkbox"
               name="denturesLowerServiceable"
               id="denturesLowerServiceable"
+              value={form.denturesLowerServiceable}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  denturesLowerServiceable: event.target.value
+                })
+              }
             />
           </div>
         </div>
@@ -359,6 +734,15 @@ export const AddExam = () => {
                 type="checkbox"
                 id="periodontalAssessmentGingivaHealth"
                 name="periodontalAssessmentGingivaHealth"
+                value={form.periodontalAssessmentGingiva.Health}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Health: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -369,6 +753,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaHypertrophic"
                 id="periodontalAssessmentGingivaHypertrophic"
+                value={form.periodontalAssessmentGingiva.Hypertrophic}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Hypertrophic: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -379,6 +772,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaHemorragic"
                 id="periodontalAssessmentGingivaHemorragic"
+                value={form.periodontalAssessmentGingiva.Hemorragic}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Hemorragic: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -389,6 +791,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaFibrous"
                 id="periodontalAssessmentGingivaFibrous"
+                value={form.periodontalAssessmentGingiva.Fibrous}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Fibrous: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -399,6 +810,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaEdematous"
                 id="periodontalAssessmentGingivaEdematous"
+                value={form.periodontalAssessmentGingiva.Edematous}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Edematous: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -409,6 +829,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaRecession"
                 id="periodontalAssessmentGingivaRecession"
+                value={form.periodontalAssessmentGingiva.Recession}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Recession: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -417,6 +846,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaPuss"
                 id="periodontalAssessmentGingivaPuss"
+                value={form.periodontalAssessmentGingiva.Puss}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Puss: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -427,6 +865,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaCyanotic"
                 id="periodontalAssessmentGingivaCyanotic"
+                value={form.periodontalAssessmentGingiva.Cyanotic}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Cyanotic: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -437,6 +884,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaUlcerated"
                 id="periodontalAssessmentGingivaUlcerated"
+                value={form.periodontalAssessmentGingiva.Ulcerated}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Ulcerated: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -447,6 +903,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaClefting"
                 id="periodontalAssessmentGingivaClefting"
+                value={form.periodontalAssessmentGingiva.Clefting}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      Clefting: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -457,11 +922,20 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentGingivaFrenumPull"
                 id="periodontalAssessmentGingivaFrenumPull"
+                value={form.periodontalAssessmentGingiva.FrenumPull}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentGingiva: {
+                      FrenumPull: event.target.value
+                    }
+                  })
+                }
               />
             </div>
           </div>
 
-          <div className="in">
+          <div className="input">
             <label htmlFor="periodontalAssessmentMag">Mag</label>
             <input
               type="text"
@@ -471,18 +945,39 @@ export const AddExam = () => {
           </div>
 
           <div className="input">
-            <label for="periodontalAssessmentCalculusSub">Calculus Sub</label>
-            <select id="periodontalAssessmentCalculusSub">
+            <label htmlFor="periodontalAssessmentCalculusSub">
+              Calculus Sub
+            </label>
+
+            <select
+              id="periodontalAssessmentCalculusSub"
+              value={form.periodontalAssessmentCalculusSub}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentCalculusSub: event.target.value
+                })
+              }
+            >
               <option value="Abundant">Abundant</option>
               <option value="Moderate">Moderate</option>
               <option value="Scanty">Scanty</option>
             </select>
           </div>
           <div className="input">
-            <label for="periodontalAsessmentCalculusSupra">
+            <label htmlFor="periodontalAsessmentCalculusSupra">
               Calculus Supra
             </label>
-            <select id="periodontalAsessmentCalculusSupra">
+            <select
+              id="periodontalAsessmentCalculusSupra"
+              value={form.periodontalAsessmentCalculusSupra}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAsessmentCalculusSupra: event.target.value
+                })
+              }
+            >
               <option value="Abundant">Abundant</option>
               <option value="Moderate">Moderate</option>
               <option value="Scanty">Scanty</option>
@@ -496,6 +991,13 @@ export const AddExam = () => {
             <input
               id="periodontalAssessmentOhiAids"
               name="periodontalAssessmentOhiAids"
+              value={form.periodontalAssessmentOhiAids}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentOhiAids: event.target.value
+                })
+              }
             />
           </div>
 
@@ -507,6 +1009,13 @@ export const AddExam = () => {
               id="periodontalAssessmentOhiFrequency"
               type="text"
               name="periodontalAssessmentOhiFrequency"
+              value={form.periodontalAssessmentOhiFrequency}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentOhiFrequency: event.target.value
+                })
+              }
             />
           </div>
 
@@ -517,6 +1026,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsAge"
                 id="periodontalAssessmentRiskFactorsAge"
+                value={form.periodontalAssessmentRiskFactors.Age}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      Age: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -527,6 +1045,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsDryMouth"
                 id="periodontalAssessmentRiskFactorsDryMouth"
+                value={form.periodontalAssessmentRiskFactors.DryMouth}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      DryMouth: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -537,6 +1064,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsSmoking"
                 id="periodontalAssessmentRiskFactorsSmoking"
+                value={form.periodontalAssessmentRiskFactors.Smoking}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      Smoking: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -547,6 +1083,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsHormonal"
                 id="periodontalAssessmentRiskFactorsHormonal"
+                value={form.periodontalAssessmentRiskFactors.Hormonal}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      Hormonal: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -557,6 +1102,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsSupplements"
                 id="periodontalAssessmentRiskFactorsSupplements"
+                value={form.periodontalAssessmentRiskFactors.Supplements}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      Supplements: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -567,6 +1121,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsNutritionalHabits"
                 id="periodontalAssessmentRiskFactorsNutritionalHabits"
+                value={form.periodontalAssessmentRiskFactors.NutritionalHabits}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      NutritionalHabits: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -577,6 +1140,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsSystemicIllness"
                 id="periodontalAssessmentRiskFactorsSystemicIllness"
+                value={form.periodontalAssessmentRiskFactors.SystemicIllness}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      SystemicIllness: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -587,6 +1159,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsImmunoCompromised"
                 id="periodontalAssessmentRiskFactorsImmunoCompromised"
+                value={form.periodontalAssessmentRiskFactors.ImmunoCompromised}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      ImmunoCompromised: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -597,6 +1178,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentRiskFactorsFamilyHistory"
                 id="periodontalAssessmentRiskFactorsFamilyHistory"
+                value={form.periodontalAssessmentRiskFactors.FamilyHistory}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentRiskFactorsAge: {
+                      FamilyHistory: event.target.value
+                    }
+                  })
+                }
               />
             </div>
           </div>
@@ -609,6 +1199,15 @@ export const AddExam = () => {
               type="text"
               name="periodontalAssessmentExtraInformation"
               id="periodontalAssessmentExtraInformation"
+              value={form.periodontalAssessmentRiskFactors.extraInformation}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentRiskFactorsAge: {
+                    extraInformation: event.target.value
+                  }
+                })
+              }
             />
           </div>
 
@@ -620,6 +1219,13 @@ export const AddExam = () => {
               type="date"
               name="periodontalAssessmentPerioChartDate"
               id="periodontalAssessmentPerioChartDate"
+              value={form.periodontalAssessmentPerioChartDate}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPerioChartDate: event.target.value
+                })
+              }
             />
           </div>
 
@@ -629,14 +1235,30 @@ export const AddExam = () => {
               type="text"
               name="periodontalAssessmentGingivitis"
               id="periodontalAssessmentGingivitis"
+              value={form.periodontalAssessmentGingivitis}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentGingivitis: event.target.value
+                })
+              }
             />
           </div>
 
           <div className="input">
-            <label for="periodontalAssessmentPeriodontitis">
+            <label htmlFor="periodontalAssessmentPeriodontitis">
               Periodontitis
             </label>
-            <select id="periodontalAssessmentPeriodontitis">
+            <select
+              id="periodontalAssessmentPeriodontitis"
+              value={form.periodontalAssessmentPeriodontitis}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPeriodontitis: event.target.value
+                })
+              }
+            >
               <option value="None">None</option>
               <option value="Mild">Mild</option>
               <option value="Moderate">Moderate</option>
@@ -645,10 +1267,19 @@ export const AddExam = () => {
           </div>
           <h2>Prognosis</h2>
           <div className="input">
-            <label for="periodontalAssessmentPrognosisMaxillary">
+            <label htmlFor="periodontalAssessmentPrognosisMaxillary">
               Maxillary
             </label>
-            <select id="periodontalAssessmentPrognosisMaxillary">
+            <select
+              id="periodontalAssessmentPrognosisMaxillary"
+              value={form.periodontalAssessmentPrognosisMaxillary}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPrognosisMaxillary: event.target.value
+                })
+              }
+            >
               <option value="Good">Good</option>
               <option value="Guarded">Guarded</option>
               <option value="Poor">Poor</option>
@@ -663,13 +1294,30 @@ export const AddExam = () => {
               type="text"
               id="periodontalAssessmentPrognosisMaxillaryConcerns"
               name="periodontalAssessmentPrognosisMaxillaryConcerns"
+              value={form.periodontalAssessmentPrognosisMaxillaryConcerns}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPrognosisMaxillaryConcerns:
+                    event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
-            <label for="periodontalAssessmentPrognosisMandibular">
+            <label htmlFor="periodontalAssessmentPrognosisMandibular">
               Mandibular
             </label>
-            <select id="periodontalAssessmentPrognosisMandibular">
+            <select
+              id="periodontalAssessmentPrognosisMandibular"
+              value={form.periodontalAssessmentPrognosisMandibular}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPrognosisMandibular: event.target.value
+                })
+              }
+            >
               <option value="Good">Good</option>
               <option value="Guarded">Guarded</option>
               <option value="Poor">Poor</option>
@@ -684,15 +1332,33 @@ export const AddExam = () => {
               type="text"
               id="periodontalAssessmentPrognosisMandibularConcerns"
               name="periodontalAssessmentPrognosisMandibularConcerns"
+              value={form.periodontalAssessmentPrognosisMandibularConcerns}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPrognosisMandibularConcerns:
+                    event.target.value
+                })
+              }
             />
           </div>
 
           <h2>Recomended Treatment</h2>
           <div className="input">
-            <label for="periodontalAssessmentTreatmentScalingAppointments">
+            <label htmlFor="periodontalAssessmentTreatmentScalingAppointments">
               Scaling Appointments with Anestitic
             </label>
-            <select id="periodontalAssessmentTreatmentScalingAppointments">
+            <select
+              id="periodontalAssessmentTreatmentScalingAppointments"
+              value={form.periodontalAssessmentTreatmentScalingAppointments}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentTreatmentScalingAppointments:
+                    event.target.value
+                })
+              }
+            >
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -701,8 +1367,18 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label for="">Perio Maintance Frequency</label>
-            <select id="periodontalAssessmentPreatmentPerioMaintance">
+            <label htmlFor="">Perio Maintance Frequency</label>
+            <select
+              id="periodontalAssessmentPreatmentPerioMaintance"
+              value={form.periodontalAssessmentPreatmentPerioMaintance}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentPreatmentPerioMaintance:
+                    event.target.value
+                })
+              }
+            >
               <option value="3">3</option>
               <option value="4-1/2">4-1/2</option>
               <option value="6">6</option>
@@ -719,6 +1395,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentTreatmentHomeCareBrushing"
                 id="periodontalAssessmentTreatmentHomeCareBrushing"
+                value={form.periodontalAssessmentTreatmentHomeCare.Brushing}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentTreatmentHomeCare: {
+                      Brushing: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -729,6 +1414,18 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentTreatmentHomeCareInterdentalCleaning"
                 id="periodontalAssessmentTreatmentHomeCareInterdentalCleaning"
+                value={
+                  form.periodontalAssessmentTreatmentHomeCare
+                    .InterdentalCleaning
+                }
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentTreatmentHomeCare: {
+                      InterdentalCleaning: event.target.value
+                    }
+                  })
+                }
               />
             </div>
           </div>
@@ -743,6 +1440,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentTreatmentAdjuctsPeriostat"
                 id="periodontalAssessmentTreatmentAdjuctsPeriostat"
+                value={form.periodontalAssessmentTreatmentAdjucts.Periostat}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentTreatmentAdjucts: {
+                      Periostat: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -753,6 +1459,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentTreatmentAdjuctsOravital"
                 id="Oravital"
+                value={form.periodontalAssessmentTreatmentAdjucts.Oravital}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentTreatmentAdjucts: {
+                      Oravital: event.target.value
+                    }
+                  })
+                }
               />
             </div>
             <div className="check">
@@ -763,6 +1478,15 @@ export const AddExam = () => {
                 type="checkbox"
                 name="periodontalAssessmentTreatmentAdjuctsArestin"
                 id="periodontalAssessmentTreatmentAdjuctsArestin"
+                value={form.periodontalAssessmentTreatmentAdjucts.Arestin}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    periodontalAssessmentTreatmentAdjucts: {
+                      Arestin: event.target.value
+                    }
+                  })
+                }
               />
             </div>
           </div>
@@ -775,6 +1499,14 @@ export const AddExam = () => {
               type="checkbox"
               name="periodontalAssessmentTreatmentPeriodontistReferral"
               id="periodontalAssessmentTreatmentPeriodontistReferral"
+              value={form.periodontalAssessmentTreatmentPeriodontistReferral}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  periodontalAssessmentTreatmentPeriodontistReferral:
+                    event.target.value
+                })
+              }
             />
           </div>
         </div>
@@ -787,14 +1519,25 @@ export const AddExam = () => {
               type="text"
               name="radiographyWidenedPdl"
               id="radiographyWidenedPdl"
+              value={form.radiographyWidenedPdl}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyWidenedPdl: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
-            <label htmlFor="radiographyradiographyPaLesions">PA Lesions</label>
+            <label htmlFor="radiographyPaLesions">PA Lesions</label>
             <input
               type="text"
               name="radiographyPaLesions"
               id="radiographyPaLesions"
+              value={form.radiographyPaLesions}
+              onChange={event =>
+                setForm({ ...form, radiographyPaLesions: event.target.value })
+              }
             />
           </div>
           <div className="input">
@@ -805,6 +1548,13 @@ export const AddExam = () => {
               type="text"
               name="radiographyBoneLossHorizontal"
               id="radiographyBoneLossHorizontal"
+              value={form.radiographyBoneLossHorizontal}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyBoneLossHorizontal: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
@@ -815,6 +1565,13 @@ export const AddExam = () => {
               type="text"
               name="radiographyBoneLossVertical"
               id="radiographyBoneLossVertical"
+              value={form.radiographyBoneLossVertical}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyBoneLossVertical: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
@@ -823,6 +1580,13 @@ export const AddExam = () => {
               type="text"
               name="radiographyImpactedTeeth"
               id="radiographyImpactedTeeth"
+              value={form.radiographyImpactedTeeth}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyImpactedTeeth: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
@@ -831,6 +1595,13 @@ export const AddExam = () => {
               type="text"
               name="radiographyPoorMargins"
               id="radiographyPoorMargins"
+              value={form.radiographyPoorMargins}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyPoorMargins: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
@@ -841,6 +1612,13 @@ export const AddExam = () => {
               type="date"
               name="radiographyChartingCompletedOn"
               id="radiographyChartingCompletedOn"
+              value={form.radiographyChartingCompletedOn}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyChartingCompletedOn: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
@@ -851,6 +1629,13 @@ export const AddExam = () => {
               type="text"
               name="radiographyRecomendedPreventiveThearpy"
               id="radiographyRecomendedPreventiveThearpy"
+              value={form.radiographyRecomendedPreventiveThearpy}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  radiographyRecomendedPreventiveThearpy: event.target.value
+                })
+              }
             />
           </div>
         </div>
@@ -865,11 +1650,29 @@ export const AddExam = () => {
               type="date"
               name="hardTissueExamChartingCompletedOn"
               id="hardTissueExamChartingCompletedOn"
+              value={form.hardTissueExamChartingCompletedOn}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  hardTissueExamChartingCompletedOn: event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
-            <label for="">Carries Risk Assessment</label>
-            <select id="hard_tissue_exam_carries_risk_assessment">
+            <label htmlFor="hardTissueExamCarriesRiskAssessment">
+              Carries Risk Assessment
+            </label>
+            <select
+              id="hardTissueExamCarriesRiskAssessment"
+              value={form.hardTissueExamCarriesRiskAssessment}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  hardTissueExamCarriesRiskAssessment: event.target.value
+                })
+              }
+            >
               <option value="low">low</option>
               <option value="medium">medium</option>
               <option value="high">high</option>
@@ -889,6 +1692,13 @@ export const AddExam = () => {
               type="text"
               name="recomendedPreventiveThearpySalvaryTest"
               id="recomendedPreventiveThearpySalvaryTest"
+              value={form.recomendedPreventiveThearpySalvaryTest}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpySalvaryTest: event.target.value
+                })
+              }
             />
           </div>
 
@@ -900,11 +1710,30 @@ export const AddExam = () => {
               type="text"
               name="recomendedPreventiveThearpyClorhexidineRinse"
               id="recomendedPreventiveThearpyClorhexidineRinse"
+              value={form.recomendedPreventiveThearpyClorhexidineRinse}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpyClorhexidineRinse:
+                    event.target.value
+                })
+              }
             />
           </div>
           <div className="input">
-            <label for="recomendedPreventiveThearpyFlouride">Flouride</label>
-            <select id="recomendedPreventiveThearpyFlouride">
+            <label htmlFor="recomendedPreventiveThearpyFlouride">
+              Flouride
+            </label>
+            <select
+              id="recomendedPreventiveThearpyFlouride"
+              value={form.recomendedPreventiveThearpyFlouride}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpyFlouride: event.target.value
+                })
+              }
+            >
               <option>none</option>
               <option>Toothpaste</option>
               <option>Varnish</option>
@@ -912,10 +1741,19 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label for="recomendedPreventiveThearpyRadiographs">
+            <label htmlFor="recomendedPreventiveThearpyRadiographs">
               Radiograph Frequency
             </label>
-            <select id="recomendedPreventiveThearpyRadiographs">
+            <select
+              id="recomendedPreventiveThearpyRadiographs"
+              value={form.recomendedPreventiveThearpyRadiographs}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpyRadiographs: event.target.value
+                })
+              }
+            >
               <option>18-24m</option>
               <option>12-18m</option>
               <option>6-12m</option>
@@ -923,10 +1761,19 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label for="recomendedPreventiveThearpyExamFrequency">
+            <label htmlFor="recomendedPreventiveThearpyExamFrequency">
               Exam Frequency
             </label>
-            <select id="recomendedPreventiveThearpyExamFrequency">
+            <select
+              id="recomendedPreventiveThearpyExamFrequency"
+              value={form.recomendedPreventiveThearpyExamFrequency}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpyExamFrequency: event.target.value
+                })
+              }
+            >
               <option value="3m">3m</option>
               <option value="6m">6m</option>
               <option value="9m">9m</option>
@@ -934,8 +1781,19 @@ export const AddExam = () => {
             </select>
           </div>
           <div className="input">
-            <label for="recomendedPreventiveThearpyAdjuncts">Adjuncts</label>
-            <select id="recomendedPreventiveThearpyAdjuncts">
+            <label htmlFor="recomendedPreventiveThearpyAdjuncts">
+              Adjuncts
+            </label>
+            <select
+              id="recomendedPreventiveThearpyAdjuncts"
+              value={form.recomendedPreventiveThearpyAdjuncts}
+              onChange={event =>
+                setForm({
+                  ...form,
+                  recomendedPreventiveThearpyAdjuncts: event.target.value
+                })
+              }
+            >
               <option value="none">none</option>
               <option value="Xylitol">Xylitol</option>
               <option value="Sealants">Sealants</option>
@@ -953,6 +1811,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisCarriesPresent"
                 id="diagnosisCarriesPresent"
+                value={form.diagnosisCarriesPresent}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisCarriesPresent: event.target.value
+                  })
+                }
               />
             </div>
             <div className="input">
@@ -963,6 +1828,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisCarriesInTreatmentPlan"
                 id="diagnosisCarriesInTreatmentPlan"
+                value={form.diagnosisCarriesInTreatmentPlan}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisCarriesInTreatmentPlan: event.target.value
+                  })
+                }
               />
             </div>
           </div>
@@ -975,6 +1847,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisFailingRestorationPresent"
                 id="diagnosisFailingRestorationPresent"
+                value={form.diagnosisFailingRestorationPresent}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisFailingRestorationPresent: event.target.value
+                  })
+                }
               />
             </div>
             <div className="input">
@@ -985,18 +1864,33 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisFailingRestorationInTreatmentPlan"
                 id="diagnosisFailingRestorationInTreatmentPlan"
+                value={form.diagnosisFailingRestorationInTreatmentPlan}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisFailingRestorationInTreatmentPlan:
+                      event.target.value
+                  })
+                }
               />
             </div>
           </div>
           <div className="paired">
             <div className="input">
-              <label htmlFor="diagnosisEndodonticPresent">
+              <label htmlFor="diagnosisFailingRestorationInTreatmentPlan">
                 Endodontic Present?
               </label>
               <input
                 type="text"
                 name="diagnosisEndodonticPresent"
                 id="diagnosisEndodonticPresent"
+                value={form.diagnosisEndodonticPresent}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisEndodonticPresent: event.target.value
+                  })
+                }
               />
             </div>
             <div className="input">
@@ -1007,6 +1901,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisEndodonticInTreatmentPlan"
                 id="diagnosisEndodonticInTreatmentPlan"
+                value={form.diagnosisEndodonticInTreatmentPlan}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisEndodonticInTreatmentPlan: event.target.value
+                  })
+                }
               />
             </div>
           </div>
@@ -1019,6 +1920,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisMissingTeethPresent"
                 id="diagnosisMissingTeethPresent"
+                value={form.diagnosisMissingTeethPresent}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisMissingTeethPresent: event.target.value
+                  })
+                }
               />
             </div>
             <div className="input">
@@ -1029,6 +1937,13 @@ export const AddExam = () => {
                 type="text"
                 name="diagnosisMissingTeethInTreatmentPlan"
                 id="diagnosisMissingTeethInTreatmentPlan"
+                value={form.diagnosisMissingTeethInTreatmentPlan}
+                onChange={event =>
+                  setForm({
+                    ...form,
+                    diagnosisMissingTeethInTreatmentPlan: event.target.value
+                  })
+                }
               />
             </div>
           </div>
