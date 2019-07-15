@@ -106,7 +106,6 @@ const AppWrapper = styled.div`
   grid-template-areas:
     "header header"
     "main main"
-  }
 `;
 
 const Main = styled.main`
